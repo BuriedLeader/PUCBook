@@ -20,4 +20,28 @@ class CaixaComInformacoes(models.Model):
 
     def __str__(self):
         return titulo + self.texto
+
+class Carona(models.Model):
+    meio_de_transporte = ""
+    valor = 0
+    rota = ""
+
+class Grupo(models.Model):
+    tipo = ""
+    quantidade_membros = 0
+    adm = ""
+
+
+class Estudante(models.Model):
+    idade = 0
+    curso = ""
+    aniversario = ""
+    periodo = 1
+    email = "@aluno.puc-rio.br"
+    ponto_de_encontro = ""
+
+class Administrador(models.Model):
+    usuario = "estudante x"
+    
+
     
