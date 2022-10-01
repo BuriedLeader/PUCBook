@@ -13,4 +13,11 @@ class Mensagem(models.Model):
 
     def __str__(self):
         return self.texto
+
+class CaixaComInformacoes(models.Model):
+    titulo = "Titulo" + "\n"
+    texto = models.TextField()
+
+    def __str__(self):
+        return titulo + self.texto
     
