@@ -10,6 +10,3 @@ def ExibeLogin(request):
 
 def ExibePaginaPrincipal(request):
     return render(request, 'pagina-principal.html', {})
-
-def teste(request):
-    return render(request, 'teste.html', {})
