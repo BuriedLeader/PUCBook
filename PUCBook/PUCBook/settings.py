@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'PUCBOOK_Site'
+    'PUCBook_Site'
 ]
 
 MIDDLEWARE = [
