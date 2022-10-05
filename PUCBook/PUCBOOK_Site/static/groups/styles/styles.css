@@ -3,8 +3,24 @@ section{
     padding:20px;
 }
 
-.p{
-    margin: 400px;
-    padding: 300px;
-    color: blue;
+p{
+   padding-left: 500px;
+   padding-bottom: 50px;
 }
+
+.CaixaGrupo {
+    height: 250px;
+    float:left;
+    width: 33.33%;
+    background-color: #D9D9D9;
+  }
+
+p1{
+    padding-top:100px;
+    padding-left: 100px;
+    color: black;
+    font-size: 20px;
+}
+
+
+
