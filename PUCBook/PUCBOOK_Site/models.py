@@ -32,16 +32,15 @@ class Grupo(models.Model):
     adm = ""
 
 
-class Estudante(models.Model):
-    idade = 0
-    curso = ""
+class Usuario(models.Model):
+
+    idade = models.IntegerField(default=0)
+    curso = models.CharField(max_length = 200)
     aniversario = ""
     periodo = 1
     email = "@aluno.puc-rio.br"
     ponto_de_encontro = ""
 
-class Administrador(models.Model):
-    usuario = "estudante x"
     
 
     

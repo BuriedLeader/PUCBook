@@ -10,3 +10,6 @@ def ExibeLogin(request):
 
 def ExibePaginaPrincipal(request):
     return render(request, 'pagina-principal.html', {})
+
+def ExibeCadastro(request):
+    return render(request, 'cadastro.html',{})
