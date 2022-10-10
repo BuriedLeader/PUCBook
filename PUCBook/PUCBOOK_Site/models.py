@@ -40,6 +40,11 @@ class Usuario(models.Model):
     email = models.CharField(max_length = 200)
     ponto_de_encontro = models.CharField(max_length = 200)
 
-    
+class Curso(models.Model):
+    nome = models.CharField(max_length = 100)
+    def __str__(self):
+        return self.nome
+
+
 
     
