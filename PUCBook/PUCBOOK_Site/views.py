@@ -13,3 +13,6 @@ def ExibePaginaPrincipal(request):
 
 def ExibeCadastro(request):
     return render(request, 'cadastro.html',{})
+
+def ExibePaginaInicial(request):
+    return render(request,'pagina-inicial.html',{})

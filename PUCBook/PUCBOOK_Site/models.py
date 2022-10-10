@@ -33,13 +33,12 @@ class Grupo(models.Model):
 
 
 class Usuario(models.Model):
-
     idade = models.IntegerField(default=0)
     curso = models.CharField(max_length = 200)
-    aniversario = ""
-    periodo = 1
-    email = "@aluno.puc-rio.br"
-    ponto_de_encontro = ""
+    aniversario = models.CharField(max_length = 10)
+    periodo = models.IntegerField(default=0)
+    email = models.CharField(max_length = 200)
+    ponto_de_encontro = models.CharField(max_length = 200)
 
     
 
