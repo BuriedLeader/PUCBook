@@ -12,7 +12,21 @@ def ExibePaginaPrincipal(request):
     return render(request, 'pagina-principal.html', {})
 
 def ExibeCadastro(request):
-    # fazer uma query que puxa todos os cursos
+    
+    if request.method == "post":
+        nome_usuario = request.post.get('nome_usuario')
+        aniversario = request.post.get()
+        curso = request.post.get()
+        periodo = request.post.get()
+        carona = request.post.get()
+        aniversario = request.post.get()
+        aniversario = request.post.get()
+        aniversario = request.post.get()
+        aniversario = request.post.get()
+        aniversario = request.post.get()
+        aniversario = request.post.get()
+        aniversario = request.post.get()
+
     cursos_lista = Curso.objects.all()
     return render(request, 'cadastro.html', { "cursos": cursos_lista })
 

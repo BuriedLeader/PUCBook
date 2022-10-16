@@ -15,16 +15,16 @@
   <body>
     <h1>Cadastro</h1>
 
-    <form action = "" method = "">
+    <form action = "/cadastro" method = "post">
     {% csrf_token %}
         <div>
         <label for="">Nome de Usuario</label>
-        <input type = "text" id = "NomeUsuario" name = "NomeUsuario" placeholder="Digite seu nome completo" Required>
+        <input type = "text" id = "nome_usuario" name = "nome_usuario" placeholder="Digite seu nome completo" Required>
         </div>
 
         <div>
         <label for="">Data de Nascimento</label>
-        <input type = "date" id = "Aniversario" name = "Aniversario" placeholder="Digite seu nome completo" Required>
+        <input type = "date" id = "aniversario" name = "aniversario" placeholder="Digite seu nome completo" Required>
         </div>
 
         <div>
@@ -38,28 +38,28 @@
 
         <div>
         <label for="">Periodo</label>
-        <input type = "number" id = "Periodo" name = "Periodo" placeholder="Digite seu Periodo" Required min = 1 max = 20>
+        <input type = "number" id = "periodo" name = "periodo" placeholder="Digite seu Periodo" Required min = 1 max = 20>
         </div>
 
         <div>
         <p1>Carona</p1>
+        <input type = "radio" id = "busca_carona" name = "busca_carona" Required>
         <label for="">Busco Carona</label>
-        <input type = "radio" id = "NomeUsuario" name = "NomeUsuario" placeholder="Digite seu nome de usuário" Required>
+        <input type = "radio" id = "oferece_carona" name = "oferece_carona" Required>
         <label for="">Ofereço Carona</label>
-        <input type = "radio" id = "NomeUsuario" name = "NomeUsuario" placeholder="Digite seu nome de usuário" Required>
+        <input type = "radio" id = "busca_oferece_carona" name = "busca_oferece_carona" Required>
         <label for="">Busco e Ofereço Carona</label>
-        <input type = "radio" id = "NomeUsuario" name = "NomeUsuario" placeholder="Digite seu nome de usuário" Required>
         </div>
         
 
         <div>
         <label for="">Ponto de Encontro</label>
-        <input type = "text" id = "NomeUsuario" name = "NomeUsuario" placeholder="Digite um ponto de encontro para caronas" Required>
+        <input type = "text" id = "ponto_encontro" name = "ponto_encontro" placeholder="Digite um ponto de encontro para caronas" Required>
         </div>
 
         <div>
         <label for="">Webmail da PUC</label>
-        <input type = "email" id = "WebmailUsuario" name = "NomeUsuario" placeholder="Digite seu webmamil da PUC" Required>
+        <input type = "email" id = "webmailUsuario" name = "webmailUsuario" placeholder="Digite seu webmail da PUC" Required>
         </div>
 
         <div>
@@ -74,7 +74,9 @@
 
         <div>
         <p>Interesses Principais</p>
+        </div>
 
+        <div>
         <label for="interesse1">Interesse 1</label>
         <select name="int1" id="int1">
           <option value="esportes">Esportes</option>
@@ -82,7 +84,9 @@
           <option value="teatro">Teatro</option>
           <option value="cinema">Cinema</option>
         </select>
+        </div>
 
+        <div>
         <label for="interesse2">Interesse 2</label>
         <select name="int2" id="int2">
           <option value="praia">Praia</option>
@@ -90,7 +94,9 @@
           <option value="bares">Bares</option>
           <option value="trilha">Trilha</option>
         </select>
+        </div>
 
+        <div>
         <label for="interesse3">Interesse 3</label>
         <select name="int3" id="int3">
           <option value="fotografia">Fotografia</option>
@@ -98,12 +104,13 @@
           <option value="culinaria">Culinaria</option>
           <option value="leitura">leitura</option>
         </select>
-        </div>
+        </div><br>
 
 
         <div>
         <button type = "submit"> Cadastrar </button>
         </div>
+
     </form>
     
     <script src="" async defer></script>
