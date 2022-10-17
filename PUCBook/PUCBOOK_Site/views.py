@@ -11,14 +11,14 @@ def ExibePerfil(request):
 def ExibeLogin(request):
 
     if request.method == "POST":
-        login = request.POST['webmail']
+        webmail = request.POST['webmail']
         senha = request.POST['senha']
 
-        Usuario = authenticate(username = login, password = senha)
+        usuario = authenticate(request, username = webmail, password = senha)
 
-        if Usuario is not None:
-            login(request,Usuario)
-            nome = Usuario.nome
+        if usuario is not None:
+            login(request,usuario)
+            nome = usuario.nome
             return render(request,'PUCBook_Site/consulta-perfil.html',{"nome":nome})
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
