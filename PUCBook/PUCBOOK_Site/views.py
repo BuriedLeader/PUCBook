@@ -1,13 +1,30 @@
-from email import message
+from django.contrib import messages
 from django.shortcuts import render
 from .models import Curso, InteresseCarona, Usuario
 from django.shortcuts import redirect,render
+from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 def ExibePerfil(request):
     return render(request, 'consulta-perfil.html', {})
 
 def ExibeLogin(request):
+
+    if request.method == "POST":
+        login = request.POST['webmail']
+        senha = request.POST['senha']
+
+        Usuario = authenticate(webmail = login, password = senha)
+
+        if Usuario is not None:
+            login(request,Usuario)
+            nome = Usuario.nome
+            return render(request,'pagina-principal.html',{"nome":nome})
+        else:
+            messages.error(request,'Usuário e/ou Senha incorretos')
+            return redirect('pagina-inicial')
+
+
     return render(request, 'login.html', {})
 
 def ExibePaginaPrincipal(request):
@@ -15,25 +32,31 @@ def ExibePaginaPrincipal(request):
 
 def ExibeCadastro(request):
     
-    if request.method == "post":
-        nome_usuario = request.post['nome_usuario']
-        aniversario = request.post['aniversario']
-        curso = request.post['curso']
-        periodo = request.post['periodo']
-        carona = request.post['carona']
-        ponto_encontro = request.post['ponto_encontro']
-        webmail = request.post['webmail']
-        senha = request.post['senha1']
-        senha_confirmada = request.post['senha2']
-        int1 = request.post['int1']
-        int2 = request.post['int2']
-        int3 = request.post['int3']
+    if request.method == "POST":
+        nome_usuario = request.POST['nome_usuario']
+        aniversario = request.POST['aniversario']
+        curso = request.POST['curso']
+        periodo = request.POST['periodo']
+        carona = request.POST['carona']
+        ponto_encontro = request.POST['ponto_encontro']
+        webmail = request.POST['webmail']
+        senha = request.POST['senha1']
+        senha_confirmada = request.POST['senha2']
+        int1 = request.POST['int1']
+        int2 = request.POST['int2']
+        int3 = request.POST['int3']
 
-        novo_usuario = Usuario.objects.create_user(nome = nome_usuario,senha = senha, curso = curso ,aniversario = aniversario,periodo = periodo ,email = webmail,ponto_de_encontro = ponto_encontro,interesse1 = int1 ,interesse2 = int2 ,interesse3 = int3 )
+        novo_usuario = Usuario.objects.create(nome = nome_usuario,password = senha, curso = curso, webmail=webmail)
+        novo_usuario.aniversario = aniversario
+        novo_usuario.periodo = periodo 
+        novo_usuario.ponto_de_encontro = ponto_encontro
+        novo_usuario.interesse1 = int1 
+        novo_usuario.interesse2 = int2 
+        novo_usuario.interesse3 = int3
         
         novo_usuario.save()
 
-        message.success(request,"Sua conta foi criada com sucesso")
+        messages.success(request,"Sua conta foi criada com sucesso")
 
         return redirect('login')
 

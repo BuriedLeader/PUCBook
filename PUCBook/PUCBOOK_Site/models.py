@@ -5,10 +5,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,BaseUserManager
 
-
 class CustomAccountManager(BaseUserManager):
 
-    def create_superuser(self,webmail,nome,senha,curso, **other_fields):
+    def create_superuser(self,webmail,nome,password,curso, **other_fields):
 
         other_fields.setdefault('is_staff',True)
         other_fields.setdefault('is_superuser',True)
@@ -19,17 +18,17 @@ class CustomAccountManager(BaseUserManager):
         if other_fields.get('is_superuser') is not True:
             raise ValueError('Superuser tem que ser um superuser')
 
-        return self.create_user(webmail,nome,curso,senha, **other_fields)
+        return self.create_user(webmail,nome,curso,password, **other_fields)
     
-    def create_user(self,webmail,nome,curso, senha, **other_fields):
+    def create_user(self,webmail,nome,curso, password, **other_fields):
 
         if not webmail:
             raise ValueError(_('Me dê um endereço de email'))
 
         webmail = self.normalize_email(webmail)
         user = self.model(webmail = webmail,nome = nome, curso = curso, **other_fields)
-        user.setpassword(senha)
-        user.save()
+        user.set_password(password)
+        user.save(using = self._db)
 
 
         return user
@@ -56,13 +55,8 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
 
     objects = CustomAccountManager()
 
-    class Meta:
-        verbose_name = _('usuario')
-        verbose_name_plural = _('usuarios')
-
     def __str__(self):
         return self.nome
-
 
 class InteresseCarona(models.Model):
     tipo = models.CharField(max_length = 100)
