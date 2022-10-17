@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Registro PUCBook</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
@@ -42,13 +42,10 @@
         </div>
 
         <div>
-        <p1>Carona</p1>
-        <input type = "radio" id = "busca_carona" name = "busca_carona" Required>
-        <label for="">Busco Carona</label>
-        <input type = "radio" id = "oferece_carona" name = "oferece_carona" Required>
-        <label for="">Ofereço Carona</label>
-        <input type = "radio" id = "busca_oferece_carona" name = "busca_oferece_carona" Required>
-        <label for="">Busco e Ofereço Carona</label>
+        <p1>Carona: </p1><br>
+        {% for carona in caronas %}
+          <input type = "radio" name = "carona"> {{ carona.tipo }}
+        {% endfor %}
         </div>
         
 
@@ -59,7 +56,7 @@
 
         <div>
         <label for="">Webmail da PUC</label>
-        <input type = "email" id = "webmailUsuario" name = "webmailUsuario" placeholder="Digite seu webmail da PUC" Required>
+        <input type = "email" id = "webmail_usuario" name = "webmail_usuario" placeholder="Digite seu webmail da PUC" Required>
         </div>
 
         <div>
