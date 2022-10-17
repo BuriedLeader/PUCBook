@@ -32,7 +32,7 @@ class CustomAccountManager(BaseUserManager):
 
 
         return user
-    
+        
     def authenticate(self,username,password):
         try:
             user = Usuario.objects.get(webmail = username)
@@ -48,6 +48,7 @@ class CustomAccountManager(BaseUserManager):
             return Usuario.objects.get(pk = uid)
         except:
             return None
+    
 
 class Usuario(AbstractBaseUser,PermissionsMixin):
     nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True)

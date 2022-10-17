@@ -19,7 +19,7 @@ def ExibeLogin(request):
         if Usuario is not None:
             login(request,Usuario)
             nome = Usuario.nome
-            return render(request,'PUCBook_Site/pagina-principal.html',{"nome":nome})
+            return render(request,'PUCBook_Site/consulta-perfil.html',{"nome":nome})
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
             return redirect('/pagina-inicial')
