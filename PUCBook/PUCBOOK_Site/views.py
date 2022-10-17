@@ -14,15 +14,15 @@ def ExibeLogin(request):
         login = request.POST['webmail']
         senha = request.POST['senha']
 
-        Usuario = authenticate(webmail = login, password = senha)
+        Usuario = authenticate(username = login, password = senha)
 
         if Usuario is not None:
             login(request,Usuario)
             nome = Usuario.nome
-            return render(request,'pagina-principal.html',{"nome":nome})
+            return render(request,'PUCBook_Site/pagina-principal.html',{"nome":nome})
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
-            return redirect('pagina-inicial')
+            return redirect('/pagina-inicial')
 
 
     return render(request, 'login.html', {})

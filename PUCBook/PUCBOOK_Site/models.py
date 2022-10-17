@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,BaseUs
 
 class CustomAccountManager(BaseUserManager):
 
-    def create_superuser(self,webmail,nome,password,curso, **other_fields):
+    def create_superuser(self,webmail,nome,password, **other_fields):
 
         other_fields.setdefault('is_staff',True)
         other_fields.setdefault('is_superuser',True)
@@ -18,24 +18,37 @@ class CustomAccountManager(BaseUserManager):
         if other_fields.get('is_superuser') is not True:
             raise ValueError('Superuser tem que ser um superuser')
 
-        return self.create_user(webmail,nome,curso,password, **other_fields)
+        return self.create_user(webmail,nome,password, **other_fields)
     
-    def create_user(self,webmail,nome,curso, password, **other_fields):
+    def create_user(self,webmail,nome, password, **other_fields):
 
         if not webmail:
             raise ValueError(_('Me dê um endereço de email'))
 
         webmail = self.normalize_email(webmail)
-        user = self.model(webmail = webmail,nome = nome, curso = curso, **other_fields)
+        user = self.model(webmail = webmail,nome = nome, **other_fields)
         user.set_password(password)
         user.save(using = self._db)
 
 
         return user
-
-
-
     
+    def authenticate(self,username,password):
+        try:
+            user = Usuario.objects.get(webmail = username)
+            success = Usuario.check_password(password)
+            if success:
+                return user
+        except Usuario.DoesNotExist:
+            pass
+        return None
+
+    def get_user(self,uid):
+        try:
+            return Usuario.objects.get(pk = uid)
+        except:
+            return None
+
 class Usuario(AbstractBaseUser,PermissionsMixin):
     nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True)
     curso = models.CharField(_('curso'),max_length = 200)
@@ -51,7 +64,7 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True, help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
 
     USERNAME_FIELD = 'webmail'
-    REQUIRED_FIELDS = ['nome','curso']
+    REQUIRED_FIELDS = ['nome']
 
     objects = CustomAccountManager()
 
@@ -67,6 +80,7 @@ class Curso(models.Model):
     nome = models.CharField(max_length = 100)
     def __str__(self):
         return self.nome
+
 
 
 
