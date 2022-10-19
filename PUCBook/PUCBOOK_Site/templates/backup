@@ -2,56 +2,7 @@
     Aqui ficam coisas aleatórias que eu guardo e não quero perder
 -->
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login PUCBook</title>
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-
-    <form action = '/login' method = 'post'>
-      {% csrf_token %}
-
-      <div class="text-center">
-      <div class="mb-3" style="margin-top:50px;margin-left:500px;margin-right:500px;margin-bottom:50px;">
-
-      <div class="input-group-prepend">
-      </div>
-      <label class="form-label" style="font-size: 17px">Email</label>
-      <input type="text" class="form-control" placeholder="Email com domínio: @aluno.puc-rio.br" aria-label="Email">
-      </div>
-
-      <div class="mb-3" style = "margin-top:150px;margin-left:500px;margin-right:500px;margin-bottom:50px;">
-      <label for="exampleInputPassword1" class="form-label" style="font-size: 17px">Senha</label>
-      <input type="password" class="form-control" placeholder="Digite sua senha" id="exampleInputPassword1">
-      </div>
-
-      <div class="text-center">
-      <button type="submit" class="btn btn-primary" style="width:200px; ">Login</button>
-      </div>
-
-      </div>
-    </form>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  </body>
-</html>
+<button type="image" alt = "submit"  src = "../static/images/seta_envio_mensagem.png" width="48" height="48"/></button>
 
 
 

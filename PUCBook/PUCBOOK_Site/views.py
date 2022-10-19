@@ -84,3 +84,6 @@ def ExibeCadastro(request):
 
 def ExibePaginaInicial(request):
     return render(request,'pagina-inicial.html',{})
+
+def ExibeChat(request):
+    return render(request,'chat.html',{})
