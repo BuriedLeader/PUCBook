@@ -24,19 +24,19 @@
           <input type="file" accept="image/*" id="foto" name = "foto" class="form-control-file"/>
           </div>
 
-          <div class="form-group">
-          <label for="">Nome de Usuario</label>
-          <input type = "text" id = "nome_usuario" name = "nome_usuario" placeholder="Digite seu nome completo" class="form-control" Required>
+          <div class="form-group" >
+          <label for="" >Nome de Usuario</label>
+          <input type = "text" id = "nome_usuario" name = "nome_usuario" placeholder="Digite seu nome completo" class="form-control border border-dark rounded"  Required>
           </div>
 
           <div class="form-group">
           <label for="">Data de Nascimento</label>
-          <input type = "date" id = "aniversario" name = "aniversario" placeholder="Digite seu nome completo" class="form-control" Required>
+          <input type = "date" id = "aniversario" name = "aniversario" placeholder="Digite seu nome completo" class="form-control border border-dark rounded" Required>
           </div>
 
           <div class="form-group" >
           <label for="">Curso</label>
-          <select name="curso" id="curso" class="form-control">
+          <select name="curso" id="curso" class="form-control border border-dark rounded">
               {% for curso in cursos %}
                   <option value="{{ curso.nome }}" >{{ curso.nome }}</option>
               {% endfor %}
@@ -45,7 +45,7 @@
 
           <div class="form-group">
           <label for="">Periodo</label>
-          <input type = "number" id = "periodo" name = "periodo" placeholder="Digite seu Periodo" Required min = 1 max = 20 class="form-control">
+          <input type = "number" id = "periodo" name = "periodo" placeholder="Digite seu Periodo" Required min = 1 max = 20 class="form-control border border-dark rounded">
           </div>
 
           <div class="form-group">
@@ -58,22 +58,22 @@
 
           <div class="form-group">
           <label for="">Ponto de Encontro</label>
-          <input type = "text" id = "ponto_encontro" name = "ponto_encontro" placeholder="Digite um ponto de encontro para caronas" class="form-control" Required>
+          <input type = "text" id = "ponto_encontro" name = "ponto_encontro" placeholder="Digite um ponto de encontro para caronas" class="form-control border border-dark rounded" Required>
           </div>
 
           <div class="form-group">
           <label for="">Webmail da PUC</label>
-          <input type = "email" id = "webmail" name = "webmail" placeholder="Digite seu webmail da PUC" class="form-control" Required>
+          <input type = "email" id = "webmail" name = "webmail" placeholder="Digite seu webmail da PUC" class="form-control border border-dark rounded" Required>
           </div>
 
           <div class="form-group">
           <label for="">Senha</label>
-          <input type = "password" id = "senha1" name = "senha1" placeholder="Digite sua senha" class="form-control" Required>
+          <input type = "password" id = "senha1" name = "senha1" placeholder="Digite sua senha" class="form-control border border-dark rounded" Required>
           </div>
 
           <div class="form-group">
           <label for="">Confirme sua senha</label>
-          <input type = "password" id = "senha2" name = "senha2" placeholder="Confirme sua senha" class="form-control" Required>
+          <input type = "password" id = "senha2" name = "senha2" placeholder="Confirme sua senha" class="form-control border border-dark rounded" Required>
           </div>
 
           <div class="form-group">
@@ -82,7 +82,7 @@
 
           <div class="form-group">
           <label for="interesse1" >Interesse 1</label>
-          <select name="int1" id="int1" class="form-control">
+          <select name="int1" id="int1" class="form-control border border-dark rounded">
             <option value="esportes">Esportes</option>
             <option value="videogame">Videogames</option>
             <option value="teatro">Teatro</option>
@@ -92,7 +92,7 @@
 
           <div class="form-group">
           <label for="interesse2" >Interesse 2</label>
-          <select name="int2" id="int2" class="form-control">
+          <select name="int2" id="int2" class="form-control border border-dark rounded">
             <option value="praia">Praia</option>
             <option value="montanha">Montanha</option>
             <option value="bares">Bares</option>
@@ -102,7 +102,7 @@
 
           <div class="form-group">
           <label for="interesse3" >Interesse 3</label>
-          <select name="int3" id="int3" class="form-control">
+          <select name="int3" id="int3" class="form-control border border-dark rounded">
             <option value="fotografia">Fotografia</option>
             <option value="pets">Pets</option>
             <option value="culinaria">Culinaria</option>
