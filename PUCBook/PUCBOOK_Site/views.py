@@ -11,15 +11,15 @@ def ExibePerfil(request):
 def ExibeLogin(request):
 
     if request.method == "POST":
-        webmail = request.POST['webmail']
+        login = request.POST['webmail']
         senha = request.POST['senha']
 
-        usuario = authenticate(request, username = webmail, password = senha)
+        Usuario = authenticate(username = login, password = senha)
 
-        if usuario is not None:
-            login(request,usuario)
-            nome = usuario.nome
-            return render(request,'PUCBook_Site/consulta-perfil.html',{"nome":nome})
+        if Usuario is not None:
+            login(request,Usuario)
+            nome = Usuario.nome
+            return render(request,'PUCBook_Site/pagina-principal.html',{"nome":nome})
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
             return redirect('/pagina-inicial')
@@ -45,6 +45,23 @@ def ExibeCadastro(request):
         int1 = request.POST['int1']
         int2 = request.POST['int2']
         int3 = request.POST['int3']
+        foto = request.POST['foto']
+
+        if Usuario.objects.filter(nome == nome_usuario):
+            messages.error(request,"Nome de usuario já existe")
+            redirect(request,'pagina-inicial')
+
+        if Usuario.objects.filter(webmail == webmail):
+            messages.error(request,'webmail já está cadastrado')
+            redirect(request,'pagina-inicial')
+
+        if len(nome_usuario) > 200:
+            messages.error(request,'nome muito grande')
+
+
+        if senha != senha_confirmada:
+            messages.error(request,'Senhas não são iguais')
+            
 
         novo_usuario = Usuario.objects.create(nome = nome_usuario,password = senha, curso = curso, webmail=webmail)
         novo_usuario.aniversario = aniversario

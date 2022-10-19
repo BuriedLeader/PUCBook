@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from multiprocessing.reduction import send_handle
 from django.conf import settings
 from django.db import models
@@ -60,6 +61,7 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
     interesse1 = models.CharField(_('interesse1'),max_length = 200)
     interesse2 = models.CharField(_('interesse2'),max_length = 200)
     interesse3 = models.CharField(_('interesse3'),max_length = 200)
+    foto = models.ImageField(upload_to = 'static/images')
 
     is_staff = models.BooleanField(_('staff status'), default=False, help_text=_('Designates whether the user can log into this admin site.'))
     is_active = models.BooleanField(_('active'), default=True, help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
