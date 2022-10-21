@@ -34,21 +34,6 @@ class CustomAccountManager(BaseUserManager):
 
         return user
         
-    def authenticate(self,username,password):
-        try:
-            user = Usuario.objects.get(webmail = username)
-            success = user.check_password(password)
-            if success:
-                return user
-        except Usuario.DoesNotExist:
-            pass
-        return None
-
-    def get_user(self,uid):
-        try:
-            return Usuario.objects.get(pk = uid)
-        except:
-            return None
     
 
 class Usuario(AbstractBaseUser,PermissionsMixin):

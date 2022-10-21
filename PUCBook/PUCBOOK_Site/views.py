@@ -19,7 +19,7 @@ def ExibeLogin(request):
         if Usuario is not None:
             login(request,Usuario)
             nome = Usuario.nome
-            return render(request,'PUCBook_Site/pagina-principal.html',{"nome":nome})
+            return redirect('/pagina-principal')
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
             return redirect('/pagina-inicial')
@@ -47,11 +47,11 @@ def ExibeCadastro(request):
         int3 = request.POST['int3']
         foto = request.POST['foto']
 
-        if Usuario.objects.filter(nome == nome_usuario):
+        if Usuario.objects.filter(nome = nome_usuario):
             messages.error(request,"Nome de usuario já existe")
             redirect(request,'pagina-inicial')
 
-        if Usuario.objects.filter(webmail == webmail):
+        if Usuario.objects.filter(webmail = webmail):
             messages.error(request,'webmail já está cadastrado')
             redirect(request,'pagina-inicial')
 

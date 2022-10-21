@@ -5,4 +5,18 @@
 <button type="image" alt = "submit"  src = "../static/images/seta_envio_mensagem.png" width="48" height="48"/></button>
 
 
+def authenticate(self,username,password):
+        try:
+            user = Usuario.objects.get(webmail = username)
+            success = user.check_password(password)
+            if success:
+                return user
+        except Usuario.DoesNotExist:
+            pass
+        return None
 
+    def get_user(self,uid):
+        try:
+            return Usuario.objects.get(pk = uid)
+        except:
+            return None
