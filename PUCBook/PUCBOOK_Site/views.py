@@ -1,9 +1,11 @@
+from tkinter.tix import Form
 from django.contrib import messages
 from django.shortcuts import render
+from django import forms
 from .models import Curso, InteresseCarona, Usuario
 from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate,login,logout
-# Create your views here.
+
 
 def ExibePerfil(request):
     return render(request, 'consulta-perfil.html', {})
@@ -11,14 +13,14 @@ def ExibePerfil(request):
 def ExibeLogin(request):
 
     if request.method == "POST":
-        login = request.POST['webmail']
+        webmail = request.POST['webmail']
         senha = request.POST['senha']
 
-        Usuario = authenticate(username = login, password = senha)
+        Usuario = authenticate(username = webmail, password = senha)
 
         if Usuario is not None:
             login(request,Usuario)
-            nome = Usuario.nome
+            nome = Usuario.webmail
             return redirect('/pagina-principal')
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
@@ -47,6 +49,7 @@ def ExibeCadastro(request):
         int3 = request.POST['int3']
         foto = request.POST['foto']
 
+        '''
         if Usuario.objects.filter(nome = nome_usuario):
             messages.error(request,"Nome de usuario já existe")
             redirect(request,'pagina-inicial')
@@ -61,9 +64,11 @@ def ExibeCadastro(request):
 
         if senha != senha_confirmada:
             messages.error(request,'Senhas não são iguais')
+        '''
+        
             
 
-        novo_usuario = Usuario.objects.create(nome = nome_usuario,password = senha, curso = curso, webmail=webmail)
+        novo_usuario = Usuario.objects.create(webmail = webmail,nome = nome_usuario,password = senha)
         novo_usuario.aniversario = aniversario
         novo_usuario.periodo = periodo 
         novo_usuario.ponto_de_encontro = ponto_encontro
