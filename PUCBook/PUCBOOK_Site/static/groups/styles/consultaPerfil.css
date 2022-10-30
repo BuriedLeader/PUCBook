@@ -1,0 +1,19 @@
+.caixas{
+    padding-top:100px;
+    padding-left: 100px;
+    color: black;
+    font-size: 20px;
+}
+
+.conteudo {
+    height: 90%;
+}
+
+.conteudo img {
+    height: 100%;
+    max-width: 100%;
+}
+
+.info{
+    size:300px
+}

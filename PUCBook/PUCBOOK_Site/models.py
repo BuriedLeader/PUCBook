@@ -73,6 +73,5 @@ class Curso(models.Model):
         return self.nome
 
 
-
-
     
+

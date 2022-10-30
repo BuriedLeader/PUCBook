@@ -1,49 +1,69 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='../static/groups/styles/styles.css'>
+    <!-- Importando Estilos -->
+    <link rel="stylesheet" href="{% static 'groups/styles/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'groups/styles/consultaPerfil.css' %}">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Consulta de Perfil</title>
 </head>
-    <body style = "background-color: #268BD2;">
-
-        <div style = "background-color: #FDF6E3;margin:50px;height: 100%;">
-    
-    
-            <div class = "TituloImagem" style = "float:left">
-
-                <img src="../static/images/LuisFernando.jpg" alt="imagem de um perfil" style = "padding-left: 200px;padding-right: 300px;padding-bottom: 60px;padding-top:60px" height="400px" width="500px">
-            </div>
-    
-            <div style = "padding-bottom: 100px;padding-top: 100px;">
-                <p >Nome: Luis Fernando Texeira Bicalho </p>
-                <p>Curso: Engenharia de Computação </p>
-                <p>Período: 20° Período </p>
-                <p>Ponto de Encontro: Jacarepaguá </p>
-                <p style  = "padding-left: 1000px;">Busca Carona</p>
-            </div>
-    
-            <div class = "GruposPerfil">
-                <div class = "CaixaGrupo">
-                    <caixas>Grupos de Carona que Participa</caixas>
-                </div> 
-                <div class = "CaixaGrupo">
-                    <caixas>Próximo Evento que irá</caixas>
-                </div> 
-                <div class = "CaixaGrupo">
-                    <caixas>Grupos Sociais que Participa</caixas>
-                </div> 
-    
-            </div>
-    
-    
+    <body class="container d-flex flex-column justify-content-center fundoAzul">
+            <div class="conteudo fundo-informacao p-2">
+                <div class="row">
+                    <div class="col-sm">
+                        <button type = "submit" value = "VoltarPaginaPrincipal" href="" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
+                            <img src="{% static 'images/IconeVoltar.png' %}">
+                        </button>
+                    </div>
+                    <div class="col-md">
+                        <img src="../static/images/LuisFernando.jpg" alt="imagem de um perfil" class = "img-thumbnail">
+                    </div>
+                    <div class="col-md">
+                        <p>Nome: ***** </p>
+                        <p>Curso: ***** </p>
+                        <p>Período: x° Período </p>
+                        <p>Ponto de Encontro: *** </p>
+                        <p>Busca Carona</p>
+                    </div>
+                    <div class = "col-sm">
+                        <button type = "submit" value = "editar_perfil" href="/edicao-perfil" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
+                            <img src="{% static 'images/EditarPerfil.png' %}">
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <img src="../static/images/carona.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <p class="card-text">Grupos de Carona que Participa</p>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <p class="card-text">Próximo Evento que irá</p>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <p class="card-text">Grupos Sociais que Participa</p>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            
         </div>
-
-    
     </body>
 </html>
-
-

@@ -92,3 +92,10 @@ def ExibePaginaInicial(request):
 
 def ExibeChat(request):
     return render(request,'chat.html',{})
+
+def ExibeEdicao(request):
+
+    cursos_lista = Curso.objects.all()
+    opcoes_carona = InteresseCarona.objects.all()
+
+    return render(request,'edicaoperfil.html',{ "cursos": cursos_lista ,"caronas":opcoes_carona})
