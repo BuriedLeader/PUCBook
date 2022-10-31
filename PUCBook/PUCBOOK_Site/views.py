@@ -98,4 +98,12 @@ def ExibeEdicao(request):
     cursos_lista = Curso.objects.all()
     opcoes_carona = InteresseCarona.objects.all()
 
-    return render(request,'edicaoperfil.html',{ "cursos": cursos_lista ,"caronas":opcoes_carona})
+    return render(request,'edicao-perfil.html',{ "cursos": cursos_lista ,"caronas":opcoes_carona})
+
+def ExibeRecuperarSenha1(request):
+
+    return render(request,'recuperar-senha1.html',{})
+
+def ExibeRecuperarSenha2(request):
+
+    return render(request,'recuperar-senha2.html',{})
