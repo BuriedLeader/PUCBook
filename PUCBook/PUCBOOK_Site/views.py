@@ -24,7 +24,7 @@ def ExibeLogin(request):
             return redirect('/pagina-principal')
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
-            return redirect('/pagina-inicial')
+            return redirect('/')
 
 
     return render(request, 'login.html', {})
