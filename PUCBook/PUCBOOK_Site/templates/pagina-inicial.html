@@ -1,25 +1,80 @@
+{% load static %}
 <!DOCTYPE html>
+<html lang="en">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PUCBook</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Importando Estilos -->
+        <link rel="stylesheet" href="{% static 'groups/styles/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'groups/styles/consulta-perfil.css' %}">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title></title>
+    </head>
+    <body class="d-flex flex-column align-items-center fundoAzul">
+        <div class="fundo-informacao p-2 container d-flex flex-column">
+          <div class="d-flex justify-content-between">
+              <img src="{% static 'images/PUCBookLogo.png' %}" alt="LogoPUCBook" class = "img-thumbnail float-left " style = "width: 150px;height:150px;background-color:#FDF6E3;border:none">    
+              <div class='buttonSize row align-items-center mx-2'>
+                <div class="col-6 px-2">
+                  <button type = "submit" class =  "btn btn-lg border rounded border-dark float-left" style = "background-color:#4E9CD3;justify-content: flex-end;" aria-label="Large button"><a href="/login" style = "color:Black">Login</a></button>
+                </div>
+                <div class="col-6 px-2 ">
+                  <button type = "submit" class =  "btn btn-lg border rounded border-dark float-left" style = "background-color:#4E9CD3;justify-content: flex-end;" aria-label="Large button" ><a href="/cadastro" style = "color:Black">Cadastro</a></button>
+                </div>
+              </div>
+          </div>
+          <div>
+            <h2 class="text-center mt-5"> O PUCBook é uma rede social criada para que estudantes da PUC Rio possam se conhecer, superando assim os efeitos sociais causados pelo isolamento social</h2>
+          </div>
+          <div>
+            <h2 class="text-center"> O PUCBook oferece ao usuário uma experiência completa de integração entre os alunos na universidade. </h2>
+          </div>
+          <div class="row">
+            <div class='col-6'>
+              <img class="img-responsive" width='100%' height="auto" src='{% static 'images/CaronaPaginaInicial.png' %}' alt = '"Propaganda" carona '/>
+            </div>
+            <div class='col-6 d-flex align-items-center justify-content-center'>
+              <p style = "font-size:58px">Carona</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class='col-6 d-flex align-items-center justify-content-center'>
+              <p style = "font-size:58px">Eventos</p>
+            </div>
+            <div class='col-6'>
+              <img class="img-responsive" width='100%' height="auto" src= '{% static 'images/FestaPaginaInicial.png' %}' alt = ' "Propaganda" Festa '/>
+            </div>
+          </div>
+          <div class="row">
+            <div class='col-6 d-flex align-items-center'>
+              <img class="img-responsive" width='100%' height="auto" src= '{% static 'images/AmigoPaginaInicial.png' %}' alt = ' "Propaganda" Amizade '/>
+            </div>
+            <div class='col-6 d-flex align-items-center justify-content-center'>
+              <p style = "font-size:58px">Conhecer Pessoas Novas</p>
+            </div>
+          </div>
+
+          <br>
+          <div class="mt-5" style = "font-size:30px">
+            <p>Criado por:</p>
+            <br>
+            <p> - Vinicius Machado </p>
+            <br>
+            <p> - João Victor Villa</p>
+          </div>
 
 
-    <h1>Bem-vindo ao PUCBook, conhecer colegas universitários nunca foi tão fácil</h1>
 
-    <button type = "submit"><a href="/login">Login</a></button>
-    <button type = "submit"><a href="/cadastro">Cadastro</a></button>
-
-    <script src="" async defer></script>
-  </body>
+        </div>
+        <script src="" async defer></script>
+    </body>
 </html>

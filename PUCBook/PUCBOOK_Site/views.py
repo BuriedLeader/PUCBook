@@ -15,12 +15,13 @@ def ExibeLogin(request):
     if request.method == "POST":
         webmail = request.POST['webmail']
         senha = request.POST['senha']
+        print(webmail)
+        print(senha)
 
         Usuario = authenticate(username = webmail, password = senha)
 
         if Usuario is not None:
-            login(request,Usuario)
-            nome = Usuario.webmail
+            login(request, Usuario)
             return redirect('/pagina-principal')
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
@@ -68,7 +69,12 @@ def ExibeCadastro(request):
         
             
 
-        novo_usuario = Usuario.objects.create(webmail = webmail,nome = nome_usuario,password = senha)
+        novo_usuario = Usuario.objects.create(
+            webmail = webmail,
+            nome = nome_usuario,
+            password = senha,
+        )
+        novo_usuario.set_password(senha)
         novo_usuario.aniversario = aniversario
         novo_usuario.periodo = periodo 
         novo_usuario.ponto_de_encontro = ponto_encontro

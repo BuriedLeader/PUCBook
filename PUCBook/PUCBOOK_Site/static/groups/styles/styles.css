@@ -10,4 +10,6 @@ html, body {
     background-color: #FDF6E3;
 }
 
-
+.buttonSize {
+    width: 250px;
+}

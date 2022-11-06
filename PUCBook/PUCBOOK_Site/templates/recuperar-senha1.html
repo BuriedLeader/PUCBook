@@ -13,17 +13,20 @@
     <div class='container'>
       <form action = "" method = "post">
         {% csrf_token %}
-        <p></p>
+        <br>
         <p> E-mail da sua conta para enviarmos um código de verificação </p>
         <input type="text" class="form-control" placeholder="Digite aqui">
-        <p></p>
+
         <button class='btn btn-primary'>Enviar</button>
-        <p></p>
-        <p>Código</p>
-        <input type="text" class="form-control" placeholder="Digite aqui">
-        <p></p>
-        <a type="submit"  href="/recuperar-senha2" class="list-group-item list-group-item-action btn btn-primary">Confirmar Código</a>
-        <p></p>
+        <br>
+        <br>
+        <div>
+          <p>Código</p>
+          <input type="text" class="form-control" placeholder="Digite aqui">
+        </div>
+        <br>
+        <a href="/recuperar-senha2" class="list-group-item list-group-item-action " style = "color:Black;">Confirmar Código</a>
+        <br>
       </form>
     </div>
 
