@@ -27,7 +27,6 @@ class CustomAccountManager(BaseUserManager):
         if not webmail:
             raise ValueError(_('Me dê um endereço de email'))
 
-        print("O Vini é doente")
         webmail = self.normalize_email(webmail)
         user = self.model(webmail = webmail,nome = nome, **other_fields)
         # user.set_password(password)

@@ -7,6 +7,7 @@ from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate,login,logout
 
 
+
 def ExibePerfil(request):
     return render(request, 'consulta-perfil.html', {})
 
@@ -36,6 +37,8 @@ def ExibePaginaPrincipal(request):
 def ExibeCadastro(request):
     
     if request.method == "POST":
+
+        #Coleta de dados
         nome_usuario = request.POST['nome_usuario']
         aniversario = request.POST['aniversario']
         curso = request.POST['curso']
@@ -50,25 +53,44 @@ def ExibeCadastro(request):
         int3 = request.POST['int3']
         foto = request.POST['foto']
 
-        '''
+        #Verificações
         if Usuario.objects.filter(nome = nome_usuario):
             messages.error(request,"Nome de usuario já existe")
-            redirect(request,'pagina-inicial')
+            return redirect('cadastro')
 
         if Usuario.objects.filter(webmail = webmail):
             messages.error(request,'webmail já está cadastrado')
-            redirect(request,'pagina-inicial')
-
+            return redirect('cadastro')
+   
         if len(nome_usuario) > 200:
             messages.error(request,'nome muito grande')
-
+            return redirect('cadastro')
 
         if senha != senha_confirmada:
             messages.error(request,'Senhas não são iguais')
-        '''
-        
-            
+            return redirect('cadastro')   
 
+        if "@aluno.puc-rio.br" not in webmail:
+            messages.error(request,'Não está utilizando um webmail de aluno da PUC')
+            return redirect('cadastro')
+
+        if nome_usuario.isnumeric():
+            messages.error(request,'Nome só possui números')
+            return redirect('cadastro')
+        
+        if len(nome_usuario) == 0:
+            messages.error(request,'nome vazio')
+            return redirect('cadastro')
+
+        if len(webmail) == 0:
+            messages.error(request,'webmail vazio')
+            return redirect('cadastro')
+
+
+
+        
+
+        #Registro do Usuário
         novo_usuario = Usuario.objects.create(
             webmail = webmail,
             nome = nome_usuario,
@@ -85,6 +107,11 @@ def ExibeCadastro(request):
         novo_usuario.save()
 
         messages.success(request,"Sua conta foi criada com sucesso")
+
+        #Email de confirmar o registro
+        assunto = 'Registro no PUCBook'
+        mensagem = "Bem-vindo ao PUCBook!"
+
 
         return redirect('login')
 
