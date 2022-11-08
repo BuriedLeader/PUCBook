@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.ExibePaginaInicial, name='Bem-vindo ao PUCBook'),
+    path('Deslogar',views.Deslogar),
     path('login', views.ExibeLogin, name='login'),
     path('pagina-principal', views.ExibePaginaPrincipal, name='pagina-principal'),
     path('consulta-perfil', views.ExibePerfil, name='consulta-perfil'),

@@ -1,12 +1,14 @@
 from tkinter.tix import Form
 from django.contrib import messages
 from django.shortcuts import render
-from django import forms
 from .models import Curso, InteresseCarona, Usuario
 from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate,login,logout
 
-
+def Deslogar(request):
+    logout(request)
+    messages.success(request,"usuario deslogado")
+    return redirect('/')
 
 def ExibePerfil(request):
     return render(request, 'consulta-perfil.html', {})
@@ -26,7 +28,7 @@ def ExibeLogin(request):
             return redirect('/pagina-principal')
         else:
             messages.error(request,'Usuário e/ou Senha incorretos')
-            return redirect('/')
+            return redirect('/login')
 
 
     return render(request, 'login.html', {})
@@ -114,7 +116,6 @@ def ExibeCadastro(request):
 
 
         return redirect('login')
-
 
     cursos_lista = Curso.objects.all()
     opcoes_carona = InteresseCarona.objects.all()
