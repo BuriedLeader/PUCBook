@@ -13,3 +13,43 @@ html, body {
 .buttonSize {
     width: 250px;
 }
+
+.formGroup form {
+    padding: 30px;
+}
+
+.formGroup .form {
+    border-radius: 10px;
+}
+
+.formGroup input {
+    width: 600px;
+}
+
+.formGroup button {
+    border: solid 1px #000;
+    width: 250px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.contentBox {
+    height: 90vh;
+}
+
+.contentBox img {
+    max-height: 250px;
+}
+
+.textGroup {
+    font-size: 50px;
+}
+
+.groupInput {
+    width: 400px;
+}
+
+.textGroupSize {
+    font-size: 40px;
+    font-weight: bold;
+}

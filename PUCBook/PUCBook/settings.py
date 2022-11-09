@@ -17,16 +17,10 @@ from telnetlib import AUTHENTICATION
 import sys
 
 sys.path.append( '\PUCBook\PUCBook\PUCBook_Site' )
-from info import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-EMAIL_USE_TLS = EMAIL_USE_TLS
-EMAIL__HOST = EMAIL__HOST
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-EMAIL_PORT = EMAIL_PORT
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -49,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'PUCBook_Site'
+    'PUCBook_Site',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -112,7 +107,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+#Envio de email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL__HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'admpucbook@gmail.com'
+EMAIL_HOST_PASSWORD = 'xfalbouvuxpxmdwa'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 # Internationalization
@@ -143,3 +144,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

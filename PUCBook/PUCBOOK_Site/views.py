@@ -1,9 +1,12 @@
 from tkinter.tix import Form
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Curso, InteresseCarona, Usuario
+from .models import Curso, InteresseCarona, Usuario, Grupo
 from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate,login,logout
+from PUCBook import settings
+from django.core.mail import send_mail
+from .forms import GrupoForms
 
 def Deslogar(request):
     logout(request)
@@ -58,35 +61,39 @@ def ExibeCadastro(request):
         #Verificações
         if Usuario.objects.filter(nome = nome_usuario):
             messages.error(request,"Nome de usuario já existe")
-            return redirect('cadastro')
+            return redirect('/cadastro')
 
         if Usuario.objects.filter(webmail = webmail):
             messages.error(request,'webmail já está cadastrado')
-            return redirect('cadastro')
+            return redirect('/cadastro')
    
         if len(nome_usuario) > 200:
             messages.error(request,'nome muito grande')
-            return redirect('cadastro')
+            return redirect('/cadastro')
 
         if senha != senha_confirmada:
             messages.error(request,'Senhas não são iguais')
-            return redirect('cadastro')   
+            return redirect('/cadastro')   
 
         if "@aluno.puc-rio.br" not in webmail:
             messages.error(request,'Não está utilizando um webmail de aluno da PUC')
-            return redirect('cadastro')
+            return redirect('/cadastro')
 
         if nome_usuario.isnumeric():
             messages.error(request,'Nome só possui números')
-            return redirect('cadastro')
+            return redirect('/cadastro')
+
+        if nome_usuario.isnumeric():
+            messages.error(request,'Nome só possui números')
+            return redirect('/cadastro')
         
         if len(nome_usuario) == 0:
             messages.error(request,'nome vazio')
-            return redirect('cadastro')
+            return redirect('/cadastro')
 
         if len(webmail) == 0:
             messages.error(request,'webmail vazio')
-            return redirect('cadastro')
+            return redirect('/cadastro')
 
 
 
@@ -112,7 +119,10 @@ def ExibeCadastro(request):
 
         #Email de confirmar o registro
         assunto = 'Registro no PUCBook'
-        mensagem = "Bem-vindo ao PUCBook!"
+        mensagem = "Bem-vindo ao PUCBook! Obrigado por se cadastrar! \n Esperamos que aproveite ao máximo a experiência.\nEnviamos também um email de confirmação para a sua conta"
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [novo_usuario.webmail]
+        send_mail(assunto,mensagem,from_email,to_list,fail_silently = True)
 
 
         return redirect('login')
@@ -141,3 +151,20 @@ def ExibeRecuperarSenha1(request):
 def ExibeRecuperarSenha2(request):
 
     return render(request,'recuperar-senha2.html',{})
+
+def ExibeBuscaGrupo(request):
+    return render(request,'busca-grupo.html',{})
+
+def grupo(request):
+    form = GrupoForms(request.POST)
+    if request.method=='POST':
+        if form.is_valid():
+            cd = form.cleaned_data
+            
+            Grupo.objects.create(nome=cd['nome'],local=cd['local'], tipo=cd['tipo'])
+           
+
+            return render(request,'pagina-principal.html')
+    return render(request,'grupos.html',{
+        'form':form,
+    })

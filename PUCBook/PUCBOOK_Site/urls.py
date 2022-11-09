@@ -12,4 +12,6 @@ urlpatterns = [
     path('edicao-perfil', views.ExibeEdicao, name='edicao-perfil'),
     path('recuperar-senha', views.ExibeRecuperarSenha1, name='recuperar-senha'),
     path('recuperar-senha2', views.ExibeRecuperarSenha2, name='recuperar-senha2'),
+    path('grupos', views.grupo, name='grupo'),
+    path('busca-grupo',views.ExibeBuscaGrupo,name = 'busca-grupo')
 ]

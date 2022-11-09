@@ -23,14 +23,15 @@ class CustomAccountManager(BaseUserManager):
 
         return self.create_user(webmail,nome,password, **other_fields)
     
-    def create_user(self, webmail, nome, password, **other_fields):
+    def create_user(self,webmail,nome, password, **other_fields):
+
         if not webmail:
             raise ValueError(_('Me dê um endereço de email'))
 
         webmail = self.normalize_email(webmail)
         user = self.model(webmail = webmail,nome = nome, **other_fields)
-        # user.set_password(password)
-        # user.save()
+        user.set_password(password)
+        user.save(using = self._db)
 
 
         return user
@@ -68,6 +69,15 @@ class InteresseCarona(models.Model):
 
 class Curso(models.Model):
     nome = models.CharField(max_length = 100)
+    def __str__(self):
+        return self.nome
+
+class Grupo(models.Model):
+    nome = models.CharField(max_length=100)
+    local = models.CharField(max_length=100)
+    integrantes = models.ManyToManyField(Usuario, blank=True)
+    tipo = models.CharField(max_length=20)
+
     def __str__(self):
         return self.nome
 

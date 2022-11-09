@@ -2,6 +2,8 @@
     Aqui ficam coisas aleatórias que eu guardo e não quero perder
 -->
 
+<button type="image" alt = "submit"  src = "../static/images/seta_envio_mensagem.png" width="48" height="48"/></button>
+
 
 def authenticate(self,username,password):
         try:
@@ -90,9 +92,10 @@ class SettingsBackend(BaseBackend):
 
 -------------------------------------------------------------------------------------------------------------------
 
-<button type = "submit" style = "border:none background-color:"><a href="/" ></a></button>
+<div class = "card" style = "width:100%;border-color:Black">
+    <div class = "card-body">
 
------------------------------------------------------------------------------------------------------
-
+    </div>
+</div>
 
 

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'groups/styles/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'groups/styles/consultaPerfil.css' %}">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+    <body class='px-5 fundoAzul d-flex justify-content-center align-items-center'>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class='contentBox bg-white d-flex flex-column justify-content-around'>
+            <div class='d-flex justify-content-center'>
+                <input class='groupInput' name='grupo' placeholder='Buscar Grupo' required/>
+                <button class='mx-3 btn btn-primary'>Pesquisar</button>
+            </div>
+            <div class='textGroup d-flex justify-content-center'>
+                Grupos Recomendados
+            </div>
+            <div class='px-5 row'>
+                <div class='col-4'>
+                    <div class='d-flex flex-column'>
+                        <img src='{% static 'images/animes.jpeg' %}' alt='animes'>
+                        <p class='d-block mx-auto textGroupSize'>Animes</p>
+                    </div>
+                </div>
+                <div class='col-4'>
+                    <div class='d-flex flex-column'>
+                        <img src='{% static 'images/memes.jpg' %}' alt='memes'>
+                        <p class='d-block mx-auto textGroupSize'>Memes</p>
+                    </div>
+                </div>
+                <div class='col-4'>
+                    <div class='d-flex flex-column'>
+                        <img src='{% static 'images/futebol.jpg' %}' alt='animes'>
+                        <p class='d-block mx-auto textGroupSize'>Futebol</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="" async defer></script>
+    </body>
+</html>
