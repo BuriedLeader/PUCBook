@@ -1,8 +1,7 @@
 from django import forms
-from .models import Grupo
-from .models import Usuario
+from .models import Evento
 
-class GrupoForms(forms.ModelForm):
+class EventoFormulario(forms.ModelForm):
     class Meta:
-        model= Grupo
-        fields = ['nome','local', 'tipo']
+        model = Evento
+        fields = ['nome','local', 'descricao','data']

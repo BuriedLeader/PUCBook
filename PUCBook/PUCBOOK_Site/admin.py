@@ -5,4 +5,4 @@ from .models import *
 admin.site.register(Curso)
 admin.site.register(Usuario)
 admin.site.register(InteresseCarona)
-admin.site.register(Grupo)
+admin.site.register(Evento)

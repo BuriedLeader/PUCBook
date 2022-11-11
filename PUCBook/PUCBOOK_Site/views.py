@@ -1,12 +1,12 @@
 from tkinter.tix import Form
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Curso, InteresseCarona, Usuario, Grupo
+from .models import Curso, InteresseCarona, Usuario, Evento
 from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate,login,logout
 from PUCBook import settings
 from django.core.mail import send_mail
-from .forms import GrupoForms
+from .forms import EventoFormulario
 
 def Deslogar(request):
     logout(request)
@@ -155,16 +155,16 @@ def ExibeRecuperarSenha2(request):
 def ExibeBuscaGrupo(request):
     return render(request,'busca-grupo.html',{})
 
-def grupo(request):
-    form = GrupoForms(request.POST)
+def ExibeCadastroEvento(request):
+    formulario = EventoFormulario(request.POST)
     if request.method=='POST':
-        if form.is_valid():
-            cd = form.cleaned_data
+        if formulario.is_valid():
+            cd = formulario.cleaned_data
             
-            Grupo.objects.create(nome=cd['nome'],local=cd['local'], tipo=cd['tipo'])
+            Evento.objects.create(nome=cd['nome'],local=cd['local'], descricao=cd['descricao'])
            
 
-            return render(request,'pagina-principal.html')
-    return render(request,'grupos.html',{
-        'form':form,
+            return redirect('pagina-principal')
+    return render(request,'criar-evento.html',{
+        'form':formulario,
     })

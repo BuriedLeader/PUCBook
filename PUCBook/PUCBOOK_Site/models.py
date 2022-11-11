@@ -40,16 +40,16 @@ class CustomAccountManager(BaseUserManager):
     
 
 class Usuario(AbstractBaseUser,PermissionsMixin):
-    nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True)
-    curso = models.CharField(_('curso'),max_length = 200)
     aniversario = models.DateField(_('aniversario'),default = timezone.now)
-    periodo = models.IntegerField(_('periodo'),default=0)
-    webmail = models.EmailField(_('webmail'),max_length = 200,unique = True)
-    ponto_de_encontro = models.CharField(_('ponto_encontro'),max_length = 200)
+    curso = models.CharField(_('curso'),max_length = 200)
+    foto = models.ImageField(upload_to = 'static/images')
     interesse1 = models.CharField(_('interesse1'),max_length = 200)
     interesse2 = models.CharField(_('interesse2'),max_length = 200)
     interesse3 = models.CharField(_('interesse3'),max_length = 200)
-    foto = models.ImageField(upload_to = 'static/images')
+    nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True)
+    ponto_de_encontro = models.CharField(_('ponto_encontro'),max_length = 200)
+    periodo = models.IntegerField(_('periodo'),default=0)
+    webmail = models.EmailField(_('webmail'),max_length = 200,unique = True)
 
     is_staff = models.BooleanField(_('staff status'), default=False, help_text=_('Designates whether the user can log into this admin site.'))
     is_active = models.BooleanField(_('active'), default=True, help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
@@ -72,11 +72,11 @@ class Curso(models.Model):
     def __str__(self):
         return self.nome
 
-class Grupo(models.Model):
+class Evento(models.Model):
     nome = models.CharField(max_length=100)
     local = models.CharField(max_length=100)
-    integrantes = models.ManyToManyField(Usuario, blank=True)
-    tipo = models.CharField(max_length=20)
+    descricao = models.CharField(max_length=200)
+    data = models.DateField(default = timezone.now)
 
     def __str__(self):
         return self.nome
