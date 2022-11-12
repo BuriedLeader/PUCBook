@@ -77,6 +77,7 @@ class Evento(models.Model):
     local = models.CharField(max_length=100)
     descricao = models.CharField(max_length=200)
     data = models.DateField(default = timezone.now)
+    foto = models.ImageField(upload_to = 'static/images')
 
     def __str__(self):
         return self.nome

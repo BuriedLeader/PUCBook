@@ -1,12 +1,50 @@
-from tkinter.tix import Form
 from django.contrib import messages
-from django.shortcuts import render
-from .models import Curso, InteresseCarona, Usuario, Evento
-from django.shortcuts import redirect,render
-from django.contrib.auth import authenticate,login,logout
-from PUCBook import settings
-from django.core.mail import send_mail
+from django.contrib.auth import authenticate, login, logout,get_user_model
+from django.shortcuts import redirect, render
 from .forms import EventoFormulario
+from .models import Curso, Evento, InteresseCarona, Usuario
+
+#Verificação de email
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
+from .tokens import account_activation_token
+
+def activate(request, uidb64, token):
+    User = get_user_model()
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+
+        messages.success(request, 'Thank you for your email confirmation. Now you can login your account.')
+        return redirect('login')
+    else:
+        messages.error(request, 'Activation link is invalid!')
+    
+    return redirect('homepage')
+
+def activateEmail(request, user, to_email):
+    mail_subject = 'Email de ativar conta PUCBook'
+    message = render_to_string('email-confirmacao.html', {
+        'user': user.nome,
+        'domain': get_current_site(request).domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+        'protocol': 'https' if request.is_secure() else 'http'
+    })
+    email = EmailMessage(mail_subject, message, to=[to_email])
+    if email.send():
+        messages.success(request, 'Email de confirmação enviado com sucesso, verifique sua conta de email. Verifique também a caixa de Spam.')
+    else:
+        messages.error(request, f'Problema ao enviar email para {to_email}, Verifique se o email foi digitado corretamente.')
 
 def Deslogar(request):
     logout(request)
@@ -78,6 +116,7 @@ def ExibeCadastro(request):
         if "@aluno.puc-rio.br" not in webmail:
             messages.error(request,'Não está utilizando um webmail de aluno da PUC')
             return redirect('/cadastro')
+        
 
         if nome_usuario.isnumeric():
             messages.error(request,'Nome só possui números')
@@ -96,7 +135,6 @@ def ExibeCadastro(request):
             return redirect('/cadastro')
 
 
-
         
 
         #Registro do Usuário
@@ -112,17 +150,14 @@ def ExibeCadastro(request):
         novo_usuario.interesse1 = int1 
         novo_usuario.interesse2 = int2 
         novo_usuario.interesse3 = int3
+        novo_usuario.foto = foto
+        novo_usuario.is_active = False
         
         novo_usuario.save()
 
-        messages.success(request,"Sua conta foi criada com sucesso")
+        activateEmail(request, novo_usuario, webmail)
 
-        #Email de confirmar o registro
-        assunto = 'Registro no PUCBook'
-        mensagem = "Bem-vindo ao PUCBook! Obrigado por se cadastrar! \n Esperamos que aproveite ao máximo a experiência.\nEnviamos também um email de confirmação para a sua conta"
-        from_email = settings.EMAIL_HOST_USER
-        to_list = [novo_usuario.webmail]
-        send_mail(assunto,mensagem,from_email,to_list,fail_silently = True)
+        messages.success(request,"Sua conta foi criada com sucesso")
 
 
         return redirect('login')
@@ -161,7 +196,7 @@ def ExibeCadastroEvento(request):
         if formulario.is_valid():
             cd = formulario.cleaned_data
             
-            Evento.objects.create(nome=cd['nome'],local=cd['local'], descricao=cd['descricao'])
+            Evento.objects.create(nome=cd['nome'],local=cd['local'], descricao=cd['descricao'],foto = cd['foto'])
            
 
             return redirect('pagina-principal')

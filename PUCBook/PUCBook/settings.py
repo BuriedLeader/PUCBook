@@ -10,16 +10,28 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-
-from pathlib import Path
-from telnetlib import AUTHENTICATION
-
 import sys
 
-sys.path.append( '\PUCBook\PUCBook\PUCBook_Site' )
+sys.path.append('\PUCBook\PUCBook\PUCBook_Site')
+
+from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+#Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'admpucbook@gmail.com'
+EMAIL_HOST_PASSWORD = 'xcxhkjiawadwcdus'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+PASSWORD_RESET_TIMEOUT = 14400
+assunto = 'Registro no PUCBook'
+mensagem = "Bem-vindo ao PUCBook! Obrigado por se cadastrar! \n Esperamos que aproveite ao máximo a experiência.\nEnviamos também um email de confirmação para a sua conta"
+from_email = EMAIL_HOST_USER
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -107,13 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#Envio de email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL__HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'admpucbook@gmail.com'
-EMAIL_HOST_PASSWORD = 'xfalbouvuxpxmdwa'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
 
 
 # Internationalization
