@@ -1,0 +1,16 @@
+{% load crispy_forms_tags %}
+{% autoescape off %}
+Olá {{ user.nome }},
+
+Nós recebemos um pedido de resetar senha, para começar, clique no link abaixo
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+Esse link só pode ser utilizado uma vez, se precisar trocar a senha novamente, visite {{ protocol }}://{{domain}} e solicite uma nova mudança de senha.
+
+Se você não fez esse pedido, pode ignorar esse email
+
+Atenciosamente,
+Administração PUCBook
+
+{% endautoescape %}

@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <h2>Mudança de senha</h2><hr>
+        <p>Por favor, insira sua nova senha.</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-outline-info" type="submit">Mudar Senha</button>
+        </form>
+    </div>
+{% endblock %}

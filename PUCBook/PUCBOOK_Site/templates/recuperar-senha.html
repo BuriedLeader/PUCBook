@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-section">
+  	<h2>Resetar senha</h2><hr>
+		<p>Enviaremos um email para você recuperar sua senha</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-outline-info" type="submit">Enviar email</button>
+        </form>
+  	</div>
+{% endblock %}

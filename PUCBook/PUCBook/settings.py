@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'admpucbook@gmail.com'
-EMAIL_HOST_PASSWORD = 'xcxhkjiawadwcdus'
+EMAIL_HOST_USER = 'pucbookprojeto@gmail.com'
+EMAIL_HOST_PASSWORD = 'hvdvpjckpzdaosko'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 PASSWORD_RESET_TIMEOUT = 14400
@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'PUCBook_Site',
-    'crispy_forms'
+    'crispy_forms',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -152,3 +153,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#Captcha
+RECAPTCHA_PUBLIC_KEY = '6Let7AIjAAAAAM-jikmXE7MQhkufpYqgU4OZmvb6'
+RECAPTCHA_PRIVATE_KEY = '6Let7AIjAAAAAPFRPAlfkArnWUtqtnx_9ry7Pj_x'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
