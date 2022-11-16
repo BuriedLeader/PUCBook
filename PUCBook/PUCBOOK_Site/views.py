@@ -144,6 +144,8 @@ def ExibeCadastro(request):
         )
         novo_usuario.set_password(senha)
         novo_usuario.aniversario = aniversario
+        novo_usuario.carona = carona
+        novo_usuario.curso = curso
         novo_usuario.periodo = periodo 
         novo_usuario.ponto_de_encontro = ponto_encontro
         novo_usuario.interesse1 = int1 

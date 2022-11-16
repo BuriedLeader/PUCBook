@@ -41,6 +41,8 @@ class CustomAccountManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser,PermissionsMixin):
     aniversario = models.DateField(_('aniversario'),default = timezone.now)
+    bio = models.CharField(_('bio'),max_length=200),
+    carona = models.CharField(_('carona'),max_length=80)
     curso = models.CharField(_('curso'),max_length = 200)
     foto = models.ImageField(upload_to = 'static/images')
     interesse1 = models.CharField(_('interesse1'),max_length = 200)
