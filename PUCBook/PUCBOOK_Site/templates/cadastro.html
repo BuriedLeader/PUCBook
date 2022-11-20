@@ -35,12 +35,13 @@
           </div>
 
           <div class="form-group" >
-          <label for="">Curso</label>
-          <select name="curso" id="curso" class="form-control border border-dark rounded">
-              {% for curso in cursos %}
-                  <option value="{{ curso.nome }}" >{{ curso.nome }}</option>
-              {% endfor %}
-          </select>
+            <label for="">Curso</label>
+            <select name="curso" id="curso" class="form-control border border-dark rounded">
+                {% for curso in cursos %}
+                    <option value="{{ curso.nome }}" >{{ curso.nome }}</option>
+                {% endfor %}
+            </select>
+          </div>
           
 
           <div class="form-group">
@@ -48,11 +49,13 @@
           <input type = "number" id = "periodo" name = "periodo" placeholder="Digite seu Periodo" Required min = 1 max = 20 class="form-control border border-dark rounded">
           </div>
 
-          <div class="form-group">
-          <p1>Carona: </p1><br>
-          {% for carona in caronas %}
-            <input type = "radio" name = "carona" > {{ carona.tipo }}
-          {% endfor %}
+          <div class="form-group" >
+            <label for="">Carona</label>
+            <select name="carona" id="carona" class="form-control border border-dark rounded">
+                {% for carona in caronas %}
+                    <option value="{{ carona.tipo }}" >{{ carona.tipo }}</option>
+                {% endfor %}
+            </select>
           </div>
           
 

@@ -15,5 +15,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>', views.passwordResetConfirm, name='password_reset_confirm'),
     path('criar-evento', views.ExibeCadastroEvento, name='criar-evento'),
     path('busca-grupo',views.ExibeBuscaGrupo,name = 'busca-grupo'),
-    path('activate/<uidb64>/<token>', views.activate, name='activate')
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
+    path('amigos',views.ExibeAmigos,name = 'amigos'),
+    path('adicionar-amigos',views.AdicionaAmigos,name = 'adicionar amigos')
 ]

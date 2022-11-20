@@ -112,9 +112,11 @@ def ExibeCadastro(request):
             messages.error(request,'Senhas não são iguais')
             return redirect('/cadastro')   
 
+        '''
         if "@aluno.puc-rio.br" not in webmail:
             messages.error(request,'Não está utilizando um webmail de aluno da PUC')
             return redirect('/cadastro')
+        '''
         
 
         if nome_usuario.isnumeric():
@@ -144,6 +146,9 @@ def ExibeCadastro(request):
         )
         novo_usuario.set_password(senha)
         novo_usuario.aniversario = aniversario
+        novo_usuario.bio = ''
+        novo_usuario.carona = carona
+        novo_usuario.curso = curso
         novo_usuario.periodo = periodo 
         novo_usuario.ponto_de_encontro = ponto_encontro
         novo_usuario.interesse1 = int1 
@@ -172,6 +177,7 @@ def ExibeChat(request):
     return render(request,'chat.html',{})
 
 def ExibeEdicao(request):
+    
 
     cursos_lista = Curso.objects.all()
     opcoes_carona = InteresseCarona.objects.all()
@@ -199,7 +205,6 @@ def ExibeCadastroEvento(request):
         'form':formulario,
     })
 
-
 def MudarSenha(request):
     user = request.user
     if request.method == 'POST':
@@ -213,7 +218,6 @@ def MudarSenha(request):
                 messages.error(request, error)
     form = MudarSenhaForm(user)
     return render(request, 'mudar-senha-confirmacao.html', {'form': form})
-
 
 def ResetarSenha(request):
     if request.method == 'POST':
@@ -283,3 +287,12 @@ def passwordResetConfirm(request, uidb64, token):
 
     messages.error(request, 'Algo deu errado, você será redirecionado para a página inicial')
     return redirect("/")
+
+def ExibeAmigos(request):
+
+    return render(request,'amigos.html',{})
+
+def AdicionaAmigos(request):
+
+    return render(request,'adicionar-amigos.html',{})
+    
