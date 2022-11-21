@@ -15,11 +15,25 @@
     </head>
     <body class="container d-flex flex-column justify-content-center fundoAzul">
         <div class="conteudo fundo-informacao p-2">
-            <div >
+            <div class = 'row'>
                 <br>
-                <a  href="/pagina-principal" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
-                    <img src="{% static 'images/IconeVoltar.png' %}" style = "width: 80px;height:100px">
-                </a>
+                <div class = 'col-4'>
+                    <a  href="/pagina-principal" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
+                        <img src="{% static 'images/IconeVoltar.png' %}" style = "width: 80px;height:100px">
+                    </a>
+                </div>
+                
+                <div class = 'col-4'>
+
+                </div>
+
+                <div class = 'col-4 d-flex justify-content-end align-items-center'>
+                    <a href = '/adicionar-amigos'>
+                        <i style = 'font-size: 40px;' class="fa fa-user-plus" aria-hidden="true"></i>
+                    </a>
+                </div>
+                
+
             </div>
 
             <div class = 'container card'>
@@ -31,7 +45,9 @@
                         <p class = 'd-flex flex-column ' style = 'font-size: 25px'>Adriano Branco</p>
                     </div>
                     <div class = 'px-5 col-4'>
-                        <i style = 'font-size: 40px;' class="fa fa-comment "></i>
+                        <a href = "/chat">
+                            <i style = 'font-size: 40px;' class="fa fa-comment "></i>
+                        </a>
                     </div>
                 </div>
                 <br>

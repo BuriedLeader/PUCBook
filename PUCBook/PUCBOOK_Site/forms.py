@@ -62,7 +62,7 @@ class EditarPerfilForm(forms.ModelForm):
     (("Tecnológico em Gestão Financeira"),("Tecnológico em Gestão Financeira")),
     (("Teologia"),("Teologia"))
     ,)
-    caronas = ((('1'),('Busco Carona')),(('2'),('Ofereço Carona')),(('3'),('Busco e Ofereço Carona')),)
+    caronas = ((('Busco Carona'),('Busco Carona')),(('Ofereço Carona'),('Ofereço Carona')),(('Busco e Ofereço Carona'),('Busco e Ofereço Carona')),)
     curso = forms.ChoiceField(choices=opcoes_curso)
     carona = forms.ChoiceField(choices = caronas)
     #foto = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))

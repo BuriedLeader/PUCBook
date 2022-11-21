@@ -121,8 +121,8 @@ def ExibeCadastro(request):
             messages.error(request,'Nome só possui números')
             return redirect('/cadastro')
 
-        if nome_usuario.isnumeric():
-            messages.error(request,'Nome só possui números')
+        if webmail.isnumeric():
+            messages.error(request,'email só possui números')
             return redirect('/cadastro')
         
         if len(nome_usuario) == 0:
