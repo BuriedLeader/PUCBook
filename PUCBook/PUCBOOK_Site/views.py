@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout,get_user_model
 from django.shortcuts import redirect, render
-from .forms import EventoFormulario,RecuperarSenhaFormulario,MudarSenhaForm
+from .forms import EventoFormulario,RecuperarSenhaFormulario,MudarSenhaForm,EditarPerfilForm
 from .models import Curso, Evento, InteresseCarona, Usuario
 from django.db.models.query_utils import Q
 
@@ -112,11 +112,9 @@ def ExibeCadastro(request):
             messages.error(request,'Senhas não são iguais')
             return redirect('/cadastro')   
 
-        '''
         if "@aluno.puc-rio.br" not in webmail:
             messages.error(request,'Não está utilizando um webmail de aluno da PUC')
             return redirect('/cadastro')
-        '''
         
 
         if nome_usuario.isnumeric():
@@ -177,12 +175,17 @@ def ExibeChat(request):
     return render(request,'chat.html',{})
 
 def ExibeEdicao(request):
-    
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST,instance = request.user)
+        
+        if form.is_valid():
+            form.save()
+            
+            return redirect('/consulta-perfil')
+    else:
+        form = EditarPerfilForm(instance = request.user)
 
-    cursos_lista = Curso.objects.all()
-    opcoes_carona = InteresseCarona.objects.all()
-
-    return render(request,'edicao-perfil.html',{ "cursos": cursos_lista ,"caronas":opcoes_carona})
+    return render(request,'edicao-perfil.html',{ 'form':form})
 
 def ExibeRecuperarSenha(request):
 

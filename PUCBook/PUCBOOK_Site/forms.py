@@ -21,50 +21,52 @@ class MudarSenhaForm(SetPasswordForm):
         model = get_user_model()
         fields = ['senha']
 
-class EditarPerfil(forms.ModelForm):
+class EditarPerfilForm(forms.ModelForm):
     opcoes_curso = (
-    (("1"),("Administração")),
-    (("2"),("Arquitetura e Urbanismo")),
-    (("3"),("Artes Cênicas")),
-    (("4"),("Ciência da Computação")),
-    (("5"),("Ciências Biológicas")),
-    (("6"),("Ciências Econômicas (Economia)")),
-    (("7"),("Ciências Sociais (Sociologia)")),
-    (("8"),("Comunicação Social")),
-    (("9"),("Design")),
-    (("10"),("Direito")),
-    (("11"),("Engenharia Ambiental")),
-    (("12"),("Engenharia Civil")),
-    (("13"),("Engenharia da Computação")),
-    (("14"),("Engenharia de Controle e Automação")),
-    (("15"),("Engenharia Elétrica")),
-    (("16"),("Engenharia de Materiais e Nanotecnologia")),
-    (("17"),("Engenharia Mecânica")),
-    (("18"),("Engenharia de Petróleo")),
-    (("19"),("Engenharia de Produção")),
-    (("20"),("Engenharia Química")),
-    (("21"),("Estudos de Mídia")),
-    (("22"),("Filosofia")),
-    (("23"),("Física")),
-    (("24"),("Geografia")),
-    (("25"),("História")),
-    (("26"),("Jornalismo")),
-    (("27"),("Letras")),
-    (("28"),("Matemática")),
-    (("29"),("Neurociências ")),
-    (("30"),("Nutrição ")),
-    (("31"),("Pedagogia")),
-    (("32"),("Psicologia")),
-    (("33"),("Química")),
-    (("34"),("Relações Internacionais")),
-    (("35"),("Serviço Social")),
-    (("36"),("Sistemas de Informação")),
-    (("37"),("Tecnológico em Gestão Financeira ")),
-    (("38"),("Teologia"))
+    (("Administração"),("Administração")),
+    (("Arquitetura e Urbanismo"),("Arquitetura e Urbanismo")),
+    (("Artes Cênicas"),("Artes Cênicas")),
+    (("Ciência da Computação"),("Ciência da Computação")),
+    (("Ciências Biológicas"),("Ciências Biológicas")),
+    (("Ciências Econômicas (Economia)"),("Ciências Econômicas (Economia)")),
+    (("Ciências Sociais (Sociologia)"),("Ciências Sociais (Sociologia)")),
+    (("Comunicação Social"),("Comunicação Social")),
+    (("Design"),("Design")),
+    (("Direito"),("Direito")),
+    (("Engenharia Ambiental"),("Engenharia Ambiental")),
+    (("Engenharia Civil"),("Engenharia Civil")),
+    (("Engenharia da Computação"),("Engenharia da Computação")),
+    (("Engenharia de Controle e Automação"),("Engenharia de Controle e Automação")),
+    (("Engenharia Elétrica"),("Engenharia Elétrica")),
+    (("Engenharia de Materiais e Nanotecnologia"),("Engenharia de Materiais e Nanotecnologia")),
+    (("Engenharia Mecânica"),("Engenharia Mecânica")),
+    (("Engenharia de Petróleo"),("Engenharia de Petróleo")),
+    (("Engenharia de Produção"),("Engenharia de Produção")),
+    (("Engenharia Química"),("Engenharia Química")),
+    (("Estudos de Mídia"),("Estudos de Mídia")),
+    (("Filosofia"),("Filosofia")),
+    (("Física"),("Física")),
+    (("Geografia"),("Geografia")),
+    (("História"),("História")),
+    (("Jornalismo"),("Jornalismo")),
+    (("Letras"),("Letras")),
+    (("Matemática"),("Matemática")),
+    (("Neurociências"),("Neurociências")),
+    (("Nutrição"),("Nutrição")),
+    (("Pedagogia"),("Pedagogia")),
+    (("Psicologia"),("Psicologia")),
+    (("Química"),("Química")),
+    (("Relações Internacionais"),("Relações Internacionais")),
+    (("Serviço Social"),("Serviço Social")),
+    (("Sistemas de Informação"),("Sistemas de Informação")),
+    (("Tecnológico em Gestão Financeira"),("Tecnológico em Gestão Financeira")),
+    (("Teologia"),("Teologia"))
     ,)
-    pontos = ((('1'),('Busco Carona')),(('2'),('Ofereço Carona')),(('3'),('Busco e Ofereço Carona')),)
+    caronas = ((('1'),('Busco Carona')),(('2'),('Ofereço Carona')),(('3'),('Busco e Ofereço Carona')),)
     curso = forms.ChoiceField(choices=opcoes_curso)
-    ponto_de_encontro = forms.ChoiceField(choices = pontos)
+    carona = forms.ChoiceField(choices = caronas)
+    #foto = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     class Meta:
         model = Usuario
-        fields = ['nome','curso','periodo','ponto_de_encontro', 'carona']
+        fields = ['bio','carona','curso','periodo','ponto_de_encontro']

@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -28,58 +29,14 @@
                         <img src="{% static 'images/IconeVoltar.png' %}" style = "width: 80px;height:100px">
                     </a>
                 </div>
-                
-                <div class="col-sm-9">
-                    <img src="{% static 'images/LuisFernando.jpg' %}" alt="imagem de um perfil" class = "img-thumbnail " style = "width: 500px;height:500px">
-                </div>   
-            </div>
 
-            <form action = "/edicaoperfil" method = "post">
-                {% csrf_token %}
+                <form action="edicao-perfil" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type = "submit" class="btn btn-success btn-primary btn-lg border border-primary mx-auto d-block" style = "font-size: 25px; border-radius: 15px;padding-bottom = 20px"> Alterar </button>
+                </form>
 
-                <div  class="form-group" >
-                    <label for = "">Foto de Perfil</label>
-                    <input type="file" accept="image/*" id="foto" name = "foto" class="form-control-file"/>
-                </div>
-
-                <div class="form-group" >
-                    <label for="" >Nome de Usuario</label>
-                    <input type = "text" id = "nome_usuario" name = "nome_usuario" placeholder="Digite seu nome completo" class="form-control border border-dark rounded"  Required>
-                </div>
-
-                <div class="form-group" >
-                    <label for="">Curso</label>
-                    <select name="curso" id="curso" class="form-control border border-dark rounded">
-                        {% for curso in cursos %}
-                            <option value="{{ curso.nome }}" >{{ curso.nome }}</option>
-                        {% endfor %}
-                    </select>
-                
-                    <div class="form-group">
-                        <label for="">Periodo</label>
-                        <input type = "number" id = "periodo" name = "periodo" placeholder="Digite seu Periodo" Required min = 1 max = 20 class="form-control border border-dark rounded">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Ponto de Encontro</label>
-                        <input type = "text" id = "ponto_encontro" name = "ponto_encontro" placeholder="Digite um ponto de encontro para caronas" class="form-control border border-dark rounded" Required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Gostos</label>
-                        <input type = "text" id = "gostos" name = "gostos" placeholder="" class="form-control border border-dark rounded" Required>
-                    </div>
-
-                    <div class="form-group">
-                        <p1>Carona: </p1><br>
-                        {% for carona in caronas %}
-                          <input type = "radio" name = "carona" > {{ carona.tipo }}
-                        {% endfor %}
-                    </div>
-
-                    <div class="form-group col-md-12 text-center" >
-                        <button type = "submit" class="btn btn-success btn-primary btn-lg border border-primary" style = "font-size: 25px; border-radius: 15px;padding-bottom = 20px"> Alterar </button>
-                    </div>
+                    
                     
             </form>
 

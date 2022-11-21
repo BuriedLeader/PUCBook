@@ -40,18 +40,18 @@ class CustomAccountManager(BaseUserManager):
     
 
 class Usuario(AbstractBaseUser,PermissionsMixin):
-    aniversario = models.DateField(_('aniversario'),default = timezone.now)
-    bio = models.CharField(_('bio'),max_length=200),
+    aniversario = models.DateField(_('aniversario'),default = timezone.now,editable= False)
+    bio = models.CharField(_('bio'),max_length=200,default = '')
     carona = models.CharField(_('carona'),max_length=80)
     curso = models.CharField(_('curso'),max_length = 200)
     foto = models.ImageField(upload_to = 'static/images')
     interesse1 = models.CharField(_('interesse1'),max_length = 200)
     interesse2 = models.CharField(_('interesse2'),max_length = 200)
     interesse3 = models.CharField(_('interesse3'),max_length = 200)
-    nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True)
+    nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True,editable= False)
     ponto_de_encontro = models.CharField(_('ponto_encontro'),max_length = 200)
     periodo = models.IntegerField(_('periodo'),default=0)
-    webmail = models.EmailField(_('webmail'),max_length = 200,unique = True)
+    webmail = models.EmailField(_('webmail'),max_length = 200,unique = True,editable= False)
 
     is_staff = models.BooleanField(_('staff status'), default=False, help_text=_('Designates whether the user can log into this admin site.'))
     is_active = models.BooleanField(_('active'), default=True, help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
