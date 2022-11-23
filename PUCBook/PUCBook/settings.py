@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'viniciusdarochaviana@gmail.com'
-EMAIL_HOST_PASSWORD = 'vocelimgvgbkhlgv'
+EMAIL_HOST_USER = 'pucbookprojeto@gmail.com'
+EMAIL_HOST_PASSWORD = 'hvdvpjckpzdaosko'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 PASSWORD_RESET_TIMEOUT = 14400
@@ -145,6 +145,9 @@ USE_TZ = True
 STATIC_URL = '/PUCBook/PUCBook_Site/static/'
 AUTH_USER_MODEL = "PUCBook_Site.Usuario" 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type

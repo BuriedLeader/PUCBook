@@ -6,6 +6,7 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
 class EventoFormulario(forms.ModelForm):
+    descricao = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     class Meta:
         model = Evento
         fields = ['nome','local', 'descricao','data','foto']
@@ -65,8 +66,8 @@ class EditarPerfilForm(forms.ModelForm):
     caronas = ((('Busco Carona'),('Busco Carona')),(('Ofereço Carona'),('Ofereço Carona')),(('Busco e Ofereço Carona'),('Busco e Ofereço Carona')),)
     curso = forms.ChoiceField(choices=opcoes_curso)
     carona = forms.ChoiceField(choices = caronas)
-    #foto = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    foto = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     class Meta:
         model = Usuario
-        fields = ['bio','carona','curso','periodo','ponto_de_encontro']
+        fields = ['bio','carona','curso','periodo','ponto_de_encontro','foto']

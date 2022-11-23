@@ -44,7 +44,7 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
     bio = models.CharField(_('bio'),max_length=200,default = '')
     carona = models.CharField(_('carona'),max_length=80)
     curso = models.CharField(_('curso'),max_length = 200)
-    foto = models.ImageField(upload_to = 'static/images')
+    foto = models.ImageField(upload_to = 'images',default = 'images/perfil_vazio.jpeg')
     interesse1 = models.CharField(_('interesse1'),max_length = 200)
     interesse2 = models.CharField(_('interesse2'),max_length = 200)
     interesse3 = models.CharField(_('interesse3'),max_length = 200)
@@ -64,6 +64,7 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
     def __str__(self):
         return self.nome
 
+
 class InteresseCarona(models.Model):
     tipo = models.CharField(max_length = 100)
     def __str__(self):
@@ -79,7 +80,7 @@ class Evento(models.Model):
     local = models.CharField(max_length=100)
     descricao = models.CharField(max_length=200)
     data = models.DateField(default = timezone.now)
-    foto = models.ImageField(upload_to = 'static/images')
+    foto = models.ImageField(upload_to = 'images',default = 'images/imagem_em_branco.jpg')
 
     def __str__(self):
         return self.nome

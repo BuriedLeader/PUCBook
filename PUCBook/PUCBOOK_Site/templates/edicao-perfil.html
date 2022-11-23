@@ -30,7 +30,7 @@
                     </a>
                 </div>
 
-                <form action="edicao-perfil" method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button type = "submit" class="btn btn-success btn-primary btn-lg border border-primary mx-auto d-block" style = "font-size: 25px; border-radius: 15px;padding-bottom = 20px"> Alterar </button>

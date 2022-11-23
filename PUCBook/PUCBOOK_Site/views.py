@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from .forms import EventoFormulario,RecuperarSenhaFormulario,MudarSenhaForm,EditarPerfilForm
 from .models import Curso, Evento, InteresseCarona, Usuario
 from django.db.models.query_utils import Q
+from django.contrib.auth.decorators import login_required
 
 #Verificação de email
 from django.template.loader import render_to_string
@@ -52,6 +53,7 @@ def Deslogar(request):
     messages.success(request,"usuario deslogado")
     return redirect('/')
 
+@login_required(login_url='/login')
 def ExibePerfil(request):
     return render(request, 'consulta-perfil.html', {})
 
@@ -73,6 +75,7 @@ def ExibeLogin(request):
 
     return render(request, 'login.html', {})
 
+@login_required(login_url='/login')
 def ExibePaginaPrincipal(request):
     return render(request, 'pagina-principal.html', {})
 
@@ -171,19 +174,20 @@ def ExibeCadastro(request):
 def ExibePaginaInicial(request):
     return render(request,'pagina-inicial.html',{})
 
+@login_required(login_url='/login')
 def ExibeChat(request):
     return render(request,'chat.html',{})
 
+@login_required(login_url='/login')
 def ExibeEdicao(request):
     if request.method == 'POST':
-        form = EditarPerfilForm(request.POST,instance = request.user)
+        form = EditarPerfilForm(request.POST,request.FILES,instance = request.user)
         
         if form.is_valid():
             form.save()
-            
             return redirect('/consulta-perfil')
     else:
-        form = EditarPerfilForm(instance = request.user)
+        form = EditarPerfilForm(request.FILES,instance = request.user)
 
     return render(request,'edicao-perfil.html',{ 'form':form})
 
@@ -191,9 +195,11 @@ def ExibeRecuperarSenha(request):
 
     return render(request,'recuperar-senha.html',{})
 
+@login_required(login_url='/login')
 def ExibeBuscaGrupo(request):
     return render(request,'busca-grupo.html',{})
 
+@login_required(login_url='/login')
 def ExibeCadastroEvento(request):
     formulario = EventoFormulario(request.POST)
     if request.method=='POST':
@@ -208,6 +214,7 @@ def ExibeCadastroEvento(request):
         'form':formulario,
     })
 
+@login_required(login_url='/login')
 def MudarSenha(request):
     user = request.user
     if request.method == 'POST':
@@ -291,10 +298,12 @@ def passwordResetConfirm(request, uidb64, token):
     messages.error(request, 'Algo deu errado, você será redirecionado para a página inicial')
     return redirect("/")
 
+@login_required(login_url='/login')
 def ExibeAmigos(request):
 
     return render(request,'amigos.html',{})
 
+@login_required(login_url='/login')
 def AdicionaAmigos(request):
 
     return render(request,'adicionar-amigos.html',{})

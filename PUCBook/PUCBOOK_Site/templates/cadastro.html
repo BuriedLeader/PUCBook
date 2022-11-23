@@ -17,7 +17,7 @@
     <div style = "background-color: #FFFFFF;margin:50px;height: 100%;">
       <h1 class="text-center h1">Cadastro</h1>
 
-      <form action = "/cadastro" method = "post" >
+      <form action = "/cadastro" method = "post" enctype="multipart/form-data" >
         {% csrf_token %}
           <div  class="form-group" >
           <label for = "">Foto de Perfil</label>
