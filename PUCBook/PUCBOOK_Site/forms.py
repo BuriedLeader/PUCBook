@@ -1,9 +1,12 @@
 from django import forms
 from .models import Evento,Usuario
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import PasswordResetForm,SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm,SetPasswordForm,UserCreationForm
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class EventoFormulario(forms.ModelForm):
     descricao = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
@@ -21,6 +24,8 @@ class MudarSenhaForm(SetPasswordForm):
     class Meta:
         model = get_user_model()
         fields = ['senha']
+
+
 
 class EditarPerfilForm(forms.ModelForm):
     opcoes_curso = (
@@ -71,3 +76,4 @@ class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['bio','carona','curso','periodo','ponto_de_encontro','foto']
+

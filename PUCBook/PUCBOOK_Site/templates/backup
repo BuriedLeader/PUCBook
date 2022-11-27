@@ -62,6 +62,7 @@ class SettingsBackend(BaseBackend):
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -102,3 +103,267 @@ class SettingsBackend(BaseBackend):
 <div class="form-group col-md-12 text-center" >
                         
 </div>
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------
+
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Importando Estilos -->
+        <link rel="stylesheet" href="{% static 'groups/styles/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'groups/styles/consulta-perfil.css' %}">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title></title>
+    </head>
+    <body class="container d-flex flex-column justify-content-center fundoAzul">
+        <div class="conteudo fundo-informacao p-2">
+          <h2>Cadastro</h2>
+          <form method="POST",enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form |crispy }}
+            <div class="form-group col-md-12 text-center" >
+              <button type = "submit" class="btn btn-success btn-primary btn-lg border border-primary" style = "font-size: 25px; border-radius: 15px;padding-bottom = 20px"> Cadastrar </button>
+            </div>
+          </form>
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>
+
+---------------------------------------------------------
+def ExibeCadastro(request):
+    
+    if request.method == "POST":
+
+        form = CadastroUsuarioForm(request.POST)
+
+        if form.is_valid():
+        
+            #Verificações
+            if Usuario.objects.filter(nome = form['nome'].value()):
+                messages.error(request,"Nome de usuario já existe")
+                return redirect('/cadastro')
+
+            if Usuario.objects.filter(webmail = form['webmail'].value):
+                messages.error(request,'webmail já está cadastrado')
+                return redirect('/cadastro')
+    
+            if len(form['nome']) > 200:
+                messages.error(request,'nome muito grande')
+                return redirect('/cadastro')
+
+            if senha != senha_confirmada:
+                messages.error(request,'Senhas não são iguais')
+                return redirect('/cadastro')   
+
+            
+            if "@aluno.puc-rio.br" not in form['webmail']:
+                messages.error(request,'Não está utilizando um webmail de aluno da PUC')
+                return redirect('/cadastro')
+            
+            
+
+            if form['nome'].isnumeric():
+                messages.error(request,'Nome só possui números')
+                return redirect('/cadastro')
+
+            if form['webmail'].isnumeric():
+                messages.error(request,'email só possui números')
+                return redirect('/cadastro')
+            
+            if len(form['nome']) == 0:
+                messages.error(request,'nome vazio')
+                return redirect('/cadastro')
+
+            if len(form['webmail']) == 0:
+                messages.error(request,'webmail vazio')
+                return redirect('/cadastro')
+
+
+            
+
+            #Registro do Usuário
+            novo_usuario = form.save()
+            novo_usuario.is_active = False
+            
+
+            activateEmail(request, novo_usuario, novo_usuario.webmail)
+
+            messages.success(request,"Sua conta foi criada com sucesso")
+
+
+            return redirect('login')
+        else:
+            return redirect('/cadastro')
+    else:
+        form = CadastroUsuarioForm()
+
+    return render(request, 'cadastro.html', { 'form':form})
+
+    ------------------------------------
+    def ExibeCadastro(request):
+    
+    if request.method == "POST":
+
+        #Coleta de dados
+        nome_usuario = request.POST['nome_usuario']
+        aniversario = request.POST['aniversario']
+        curso = request.POST['curso']
+        periodo = request.POST['periodo']
+        carona = request.POST['carona']
+        ponto_encontro = request.POST['ponto_encontro']
+        webmail = request.POST['webmail']
+        senha = request.POST['senha1']
+        senha_confirmada = request.POST['senha2']
+        int1 = request.POST['int1']
+        int2 = request.POST['int2']
+        int3 = request.POST['int3']
+        foto = request.POST['foto']
+
+        #Verificações
+        if Usuario.objects.filter(nome = nome_usuario):
+            messages.error(request,"Nome de usuario já existe")
+            return redirect('/cadastro')
+
+        if Usuario.objects.filter(webmail = webmail):
+            messages.error(request,'webmail já está cadastrado')
+            return redirect('/cadastro')
+   
+        if len(nome_usuario) > 200:
+            messages.error(request,'nome muito grande')
+            return redirect('/cadastro')
+
+        if senha != senha_confirmada:
+            messages.error(request,'Senhas não são iguais')
+            return redirect('/cadastro')   
+
+        if "@aluno.puc-rio.br" not in webmail:
+            messages.error(request,'Não está utilizando um webmail de aluno da PUC')
+            return redirect('/cadastro')
+        
+
+        if nome_usuario.isnumeric():
+            messages.error(request,'Nome só possui números')
+            return redirect('/cadastro')
+
+        if webmail.isnumeric():
+            messages.error(request,'email só possui números')
+            return redirect('/cadastro')
+        
+        if len(nome_usuario) == 0:
+            messages.error(request,'nome vazio')
+            return redirect('/cadastro')
+
+        if len(webmail) == 0:
+            messages.error(request,'webmail vazio')
+            return redirect('/cadastro')
+
+
+        
+
+        #Registro do Usuário
+        novo_usuario = Usuario.objects.create(
+            webmail = webmail,
+            nome = nome_usuario,
+            password = senha,
+        )
+        novo_usuario.set_password(senha)
+        novo_usuario.aniversario = aniversario
+        novo_usuario.bio = ''
+        novo_usuario.carona = carona
+        novo_usuario.curso = curso
+        novo_usuario.periodo = periodo 
+        novo_usuario.ponto_de_encontro = ponto_encontro
+        novo_usuario.interesse1 = int1 
+        novo_usuario.interesse2 = int2 
+        novo_usuario.interesse3 = int3
+        novo_usuario.foto = foto
+        novo_usuario.is_active = False
+        
+        novo_usuario.save()
+
+        activateEmail(request, novo_usuario, webmail)
+
+        messages.success(request,"Sua conta foi criada com sucesso")
+
+
+        return redirect('login')
+
+    cursos_lista = Curso.objects.all()
+    opcoes_carona = InteresseCarona.objects.all()
+    return render(request, 'cadastro.html', { "cursos": cursos_lista ,"caronas":opcoes_carona})
+
+    ---------------------------------------------------------------------------------------------------------------
+
+    class CadastroUsuarioForm(UserCreationForm):
+    opcoes_curso = (
+    (("Administração"),("Administração")),
+    (("Arquitetura e Urbanismo"),("Arquitetura e Urbanismo")),
+    (("Artes Cênicas"),("Artes Cênicas")),
+    (("Ciência da Computação"),("Ciência da Computação")),
+    (("Ciências Biológicas"),("Ciências Biológicas")),
+    (("Ciências Econômicas (Economia)"),("Ciências Econômicas (Economia)")),
+    (("Ciências Sociais (Sociologia)"),("Ciências Sociais (Sociologia)")),
+    (("Comunicação Social"),("Comunicação Social")),
+    (("Design"),("Design")),
+    (("Direito"),("Direito")),
+    (("Engenharia Ambiental"),("Engenharia Ambiental")),
+    (("Engenharia Civil"),("Engenharia Civil")),
+    (("Engenharia da Computação"),("Engenharia da Computação")),
+    (("Engenharia de Controle e Automação"),("Engenharia de Controle e Automação")),
+    (("Engenharia Elétrica"),("Engenharia Elétrica")),
+    (("Engenharia de Materiais e Nanotecnologia"),("Engenharia de Materiais e Nanotecnologia")),
+    (("Engenharia Mecânica"),("Engenharia Mecânica")),
+    (("Engenharia de Petróleo"),("Engenharia de Petróleo")),
+    (("Engenharia de Produção"),("Engenharia de Produção")),
+    (("Engenharia Química"),("Engenharia Química")),
+    (("Estudos de Mídia"),("Estudos de Mídia")),
+    (("Filosofia"),("Filosofia")),
+    (("Física"),("Física")),
+    (("Geografia"),("Geografia")),
+    (("História"),("História")),
+    (("Jornalismo"),("Jornalismo")),
+    (("Letras"),("Letras")),
+    (("Matemática"),("Matemática")),
+    (("Neurociências"),("Neurociências")),
+    (("Nutrição"),("Nutrição")),
+    (("Pedagogia"),("Pedagogia")),
+    (("Psicologia"),("Psicologia")),
+    (("Química"),("Química")),
+    (("Relações Internacionais"),("Relações Internacionais")),
+    (("Serviço Social"),("Serviço Social")),
+    (("Sistemas de Informação"),("Sistemas de Informação")),
+    (("Tecnológico em Gestão Financeira"),("Tecnológico em Gestão Financeira")),
+    (("Teologia"),("Teologia"))
+    ,)
+    caronas = ((('Busco Carona'),('Busco Carona')),(('Ofereço Carona'),('Ofereço Carona')),(('Busco e Ofereço Carona'),('Busco e Ofereço Carona')),)
+    interesses1 = ((('Esportes'),('Esportes')),(('Videogame'),('Videogame')),(('Teatro'),('Teatro')),(('Cinema'),('Cinema')))
+    interesses2 = ((('Bares'),('Bares')),(('Montanha'),('Montanha')),(('Praia'),('Praia')),(('Trilha'),('Trilha')))
+    interesses3 = ((('Fotografia'),('Fotografia')),(('Culinária'),('Culinária')),(('Pets'),('Pets')),(('Livros'),('Livros')))
+    curso = forms.ChoiceField(choices=opcoes_curso)
+    carona = forms.ChoiceField(choices = caronas)
+    interesse1 = forms.ChoiceField(choices = interesses1)
+    interesse2 = forms.ChoiceField(choices = interesses2)
+    interesse3 = forms.ChoiceField(choices = interesses3)
+    foto = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    aniversario = forms.DateField(widget=DateInput)
+    class Meta:
+        model = Usuario
+        fields = ['foto','nome','webmail','curso','periodo','aniversario','ponto_de_encontro','carona','interesse1','interesse2','interesse3']

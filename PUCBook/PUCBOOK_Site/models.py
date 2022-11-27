@@ -1,3 +1,4 @@
+import os
 from distutils.command.upload import upload
 from multiprocessing.reduction import send_handle
 from django.conf import settings
@@ -5,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,BaseUserManager
+from django.template.defaultfilters import slugify
 
 
 
@@ -40,7 +42,7 @@ class CustomAccountManager(BaseUserManager):
     
 
 class Usuario(AbstractBaseUser,PermissionsMixin):
-    aniversario = models.DateField(_('aniversario'),default = timezone.now,editable= False)
+    aniversario = models.DateField(_('aniversario'),default = timezone.now)
     bio = models.CharField(_('bio'),max_length=200,default = '')
     carona = models.CharField(_('carona'),max_length=80)
     curso = models.CharField(_('curso'),max_length = 200)
@@ -48,10 +50,10 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
     interesse1 = models.CharField(_('interesse1'),max_length = 200)
     interesse2 = models.CharField(_('interesse2'),max_length = 200)
     interesse3 = models.CharField(_('interesse3'),max_length = 200)
-    nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True,editable= False)
+    nome = models.CharField(_('nome'),max_length = 200, unique = True, blank = True)
     ponto_de_encontro = models.CharField(_('ponto_encontro'),max_length = 200)
     periodo = models.IntegerField(_('periodo'),default=0)
-    webmail = models.EmailField(_('webmail'),max_length = 200,unique = True,editable= False)
+    webmail = models.EmailField(_('webmail'),max_length = 200,unique = True)
 
     is_staff = models.BooleanField(_('staff status'), default=False, help_text=_('Designates whether the user can log into this admin site.'))
     is_active = models.BooleanField(_('active'), default=True, help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
@@ -63,6 +65,11 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
 
     def __str__(self):
         return self.nome
+
+    def image_upload_to(self, instance=None):
+        if instance:
+            return os.path.join('Usuario', slugify(self.slug), instance)
+        return None
 
 
 class InteresseCarona(models.Model):

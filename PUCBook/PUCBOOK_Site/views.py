@@ -55,7 +55,7 @@ def Deslogar(request):
 
 @login_required(login_url='/login')
 def ExibePerfil(request):
-    return render(request, 'consulta-perfil.html', {})
+    return render(request, 'consulta-perfil.html', {'user':request.user})
 
 def ExibeLogin(request):
 
@@ -77,7 +77,7 @@ def ExibeLogin(request):
 
 @login_required(login_url='/login')
 def ExibePaginaPrincipal(request):
-    return render(request, 'pagina-principal.html', {})
+    return render(request, 'pagina-principal.html', {'user':request.user})
 
 def ExibeCadastro(request):
     
@@ -96,7 +96,7 @@ def ExibeCadastro(request):
         int1 = request.POST['int1']
         int2 = request.POST['int2']
         int3 = request.POST['int3']
-        foto = request.POST['foto']
+        foto = request.FILES['foto']
 
         #Verificações
         if Usuario.objects.filter(nome = nome_usuario):
@@ -115,9 +115,12 @@ def ExibeCadastro(request):
             messages.error(request,'Senhas não são iguais')
             return redirect('/cadastro')   
 
+        '''
         if "@aluno.puc-rio.br" not in webmail:
             messages.error(request,'Não está utilizando um webmail de aluno da PUC')
             return redirect('/cadastro')
+        '''
+        
         
 
         if nome_usuario.isnumeric():
@@ -307,4 +310,7 @@ def ExibeAmigos(request):
 def AdicionaAmigos(request):
 
     return render(request,'adicionar-amigos.html',{})
+
+def ExibeEventos(request):
+    return render(request,'eventos.html',{})
     

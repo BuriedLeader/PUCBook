@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.ExibePaginaInicial, name='Bem-vindo ao PUCBook'),
@@ -10,6 +12,7 @@ urlpatterns = [
     path('cadastro', views.ExibeCadastro, name='cadastro'),
     path('chat', views.ExibeChat, name='chat'),
     path('edicao-perfil', views.ExibeEdicao, name='edicao-perfil'),
+    path('eventos',views.ExibeEventos,name = 'eventos'),
     path("mudar-senha", views.MudarSenha, name="mudar-senha"),
     path('recuperar-senha', views.ResetarSenha, name='recuperar-senha'),
     path('reset/<uidb64>/<token>', views.passwordResetConfirm, name='password_reset_confirm'),
@@ -18,4 +21,4 @@ urlpatterns = [
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('amigos',views.ExibeAmigos,name = 'amigos'),
     path('adicionar-amigos',views.AdicionaAmigos,name = 'adicionar amigos')
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

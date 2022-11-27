@@ -34,14 +34,14 @@
 
                           <div >
                             <br><br><br><br><br><br><br>
-                            <img src="{% static 'images/LuisFernando.jpg' %}" style = "width: 100%;height:100%;">
+                            <img src="{{ user.foto.url }}" style = "width: 100%;height:100%;">
                           </div>
     
                           <br>
     
                           <div> 
                             
-                            <button style="font-size:24px;background-color:#FDF6E3;border-radius:25px"> <a href = "/consulta-perfil" class='principal'>Luis Fernando Bicalho <i class="fa fa-user-circle"></i> </a></button>
+                            <button style="font-size:24px;background-color:#FDF6E3;border-radius:25px"> <a href = "/consulta-perfil" class='principal'>{{user.nome}} <i class="fa fa-user-circle"></i> </a></button>
                             
                           </div>
 
