@@ -88,6 +88,7 @@ class Evento(models.Model):
     descricao = models.CharField(max_length=200)
     data = models.DateField(default = timezone.now)
     foto = models.ImageField(upload_to = 'images',default = 'images/imagem_em_branco.jpg')
+    criador = models.CharField(max_length=255,default = '')
 
     def __str__(self):
         return self.nome

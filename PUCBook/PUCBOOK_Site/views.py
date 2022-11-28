@@ -204,18 +204,19 @@ def ExibeBuscaGrupo(request):
 
 @login_required(login_url='/login')
 def ExibeCadastroEvento(request):
-    formulario = EventoFormulario(request.POST)
+    
     if request.method=='POST':
+        formulario = EventoFormulario(request.POST,request.FILES)
         if formulario.is_valid():
-            cd = formulario.cleaned_data
-            
-            Evento.objects.create(nome=cd['nome'],local=cd['local'], descricao=cd['descricao'],foto = cd['foto'])
-           
+            evento = formulario.save(commit = False)
+            evento.criador = request.user
+            evento = formulario.save()
 
-            return redirect('pagina-principal')
-    return render(request,'criar-evento.html',{
-        'form':formulario,
-    })
+            return redirect('eventos')
+    else:
+        formulario = EventoFormulario(request.FILES)
+
+    return render(request,'criar-evento.html',{'form':formulario,})
 
 @login_required(login_url='/login')
 def MudarSenha(request):
@@ -312,5 +313,8 @@ def AdicionaAmigos(request):
     return render(request,'adicionar-amigos.html',{})
 
 def ExibeEventos(request):
-    return render(request,'eventos.html',{})
+
+    eventos = Evento.objects.all()
+
+    return render(request,'eventos.html',{'eventos':eventos})
     

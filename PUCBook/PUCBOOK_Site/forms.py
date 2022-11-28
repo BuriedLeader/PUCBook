@@ -1,7 +1,7 @@
 from django import forms
 from .models import Evento,Usuario
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import PasswordResetForm,SetPasswordForm,UserCreationForm
+from django.contrib.auth.forms import PasswordResetForm,SetPasswordForm
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
@@ -10,6 +10,7 @@ class DateInput(forms.DateInput):
 
 class EventoFormulario(forms.ModelForm):
     descricao = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    data = forms.DateField(widget=DateInput)
     class Meta:
         model = Evento
         fields = ['nome','local', 'descricao','data','foto']
