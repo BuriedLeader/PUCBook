@@ -16,51 +16,32 @@
     <body class="container d-flex flex-column justify-content-center fundoAzul">
             <div class="conteudo fundo-informacao p-2">
                 <div class="row">
-                    <div class="col-sm">
+                    <div class="col-2">
                         <a href = "/pagina-principal" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
                             <img src="{% static 'images/IconeVoltar.png' %}"style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
                         </a>
                     </div>
-                    <div class="col-md">
+                    <div class="col-3">
                         <img src="{{ user.foto.url }}" alt="imagem de um perfil" class = 'img-thumbnail'></img>
                     </div>
-                    <div class="col-md">
+                    <div class="col-2">
                         <p class = 'texto'>Nome: {{ user.nome }} </p>
                         <p>Curso: {{ user.curso }} </p>
                         <p>Período: {{ user.periodo }}° Período </p>
                         <p>Ponto de Encontro: {{ user.ponto_de_encontro }} </p>
                         <p>{{ user.Carona }}</p>
+                        <p>Alguns dos interesses deste usuário são:</p>
+                        <p>-{{user.interesse1}}</p>
+                        <p>-{{user.interesse2}}</p>
+                        <p>-{{user.interesse3}}</p>
                     </div>
-                    <div class = "col-sm">
+                    <div class = 'col-2'>
+                        <p>{{user.bio}}</p>
+                    </div>
+                    <div class = "col-2">
                         <a  href = "/edicao-perfil" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
                             <img src="{% static 'images/EditarPerfil.png' %}" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;" >
                         </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="card">
-                            <img src="{% static 'images/CaronaPaginaInicial.png' %}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Grupos de Carona que Participa</p>
-                            </div>
-                            </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <img src="{% static 'images/FestaPaginaInicial.png' %}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Próximo Evento que irá</p>
-                            </div>
-                            </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <img src="{% static 'images/AmigoPaginaInicial.png' %}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Grupos Sociais que Participa</p>
-                            </div>
-                            </div>
                     </div>
                 </div>
             
