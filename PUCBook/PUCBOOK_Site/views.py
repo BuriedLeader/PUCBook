@@ -6,6 +6,7 @@ from .models import Curso, Evento, InteresseCarona, Usuario
 from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
 
+
 #Verificação de email
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -315,6 +316,9 @@ def AdicionaAmigos(request):
 def ExibeEventos(request):
 
     eventos = Evento.objects.all()
+
+    def get_queryset(self): # new
+        return Evento.objects.filter(nome__icontains='A')
 
     return render(request,'eventos.html',{'eventos':eventos})
     

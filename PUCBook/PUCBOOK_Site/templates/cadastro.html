@@ -15,6 +15,15 @@
   </head>
   <body style = "background-color: #268BD2;">
     <div style = "background-color: #FFFFFF;margin:50px;height: 100%;">
+
+      {% for message in messages %}
+      <div class = "alert alert-{{message.tag}} alert-dismissible fade show" role = 'alert'> 
+
+        <strong>{{ message }}</strong>
+        <button type = 'button' class = 'close' data-dismiss = 'alert' aria-label = 'close'>X</button>
+
+      </div>
+
       <h1 class="text-center h1">Cadastro</h1>
 
       <form action = "/cadastro" method = "post" enctype="multipart/form-data" >
