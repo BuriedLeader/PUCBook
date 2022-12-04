@@ -13,6 +13,7 @@ urlpatterns = [
     path('chat', views.ExibeChat, name='chat'),
     path('edicao-perfil', views.ExibeEdicao, name='edicao-perfil'),
     path('eventos',views.ExibeEventos,name = 'eventos'),
+    path('busca-evento',views.BuscaEventos,name = 'busca-evento'),
     path("mudar-senha", views.MudarSenha, name="mudar-senha"),
     path('recuperar-senha', views.ResetarSenha, name='recuperar-senha'),
     path('reset/<uidb64>/<token>', views.passwordResetConfirm, name='password_reset_confirm'),

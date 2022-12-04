@@ -1,67 +1,66 @@
 {% load static %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
     <head>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Adicionar Amigos</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Importando Estilos -->
         <link rel="stylesheet" href="{% static 'groups/styles/styles.css' %}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/015b8468ac.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title>Adicionar Amigos</title>
     </head>
-    <body class='px-5 fundoAzul d-flex justify-content-center align-items-center'>
-        <div class='contentBox bg-white d-flex flex-column justify-content-around'>
-            <div class='d-flex justify-content-center'>
-                <input class='groupInput' name='perfil' placeholder='Digite um nome' required/>
-                <button class='mx-3 btn btn-primary'>Pesquisar</button>
-            </div>
-            <div class = 'container card'>
-                <div class = ' px-5 row card-body border border-dark rounded align-items-center'>
-                    <div class = ' px-5 col-4'>
-                        <img src="{% static 'images/AdrianoBranco.jpg' %}" alt="imagem de um perfil" class = "rounded float-left d-flex flex-column " style = 'height: 150px;width: 150px;'>
-                    </div>
-                    <div class = 'px-5 col-4'>
-                        <p class = 'd-flex flex-column ' style = 'font-size: 25px'>Adriano Branco</p>
-                    </div>
-                    <div class = 'px-5 col-4'>
-                        <button class = 'd-flex flex-column btn btn-primary btn-md text-center'>Adicionar Amigo</button>
-                    </div>
-                </div>
+    <body class="container fundoAzul" style = 'height:100%'>
+        <div class="conteudo fundo-informacao p-2" style = 'height:100%'>
+            <div class = 'row' >
                 <br>
-                <div class = ' px-5 row card-body border border-dark rounded align-items-center'>
-                    <div class = ' px-5 col-4'>
-                        <img src="{% static 'images/LuisFernando.jpg' %}" alt="imagem de um perfil" class = "d-flex flex-column" style = 'height: 150px;width: 150px;'>
-                    </div>
-                    <div class = 'px-5 col-4'>
-                        <p class = 'd-flex flex-column' style = 'font-size: 25px'>Luis Fernando</p>
-                    </div>
-                    <div class = 'px-5 col-4'>
-                        <button class = 'd-flex flex-column btn btn-primary btn-md text-center'>Adicionar Amigo</button>
-                    </div>
+                <div class = 'col-4'>
+                    <a  href="/amigos" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
+                        <img src="{% static 'images/IconeVoltar.png' %}" style = "width: 80px;height:100px">
+                    </a>
                 </div>
-                <br>
-                <div class = ' px-5 row card-body border border-dark rounded align-items-center'>
-                    <div class = ' px-5 col-4'>
-                        <img src="{% static 'images/MCPoze.jpeg' %}" alt="imagem de um perfil" class = "d-flex flex-column" style = 'height: 150px;width: 150px;'>
-                    </div>
-                    <div class = 'px-5 col-4'>
-                        <p class = 'd-flex flex-column text-xl' style = 'font-size: 25px'>Pitbull do funk</p>
-                    </div>
-                    <div class = 'px-5 col-4'>
-                        <button class = 'd-flex flex-column btn btn-primary btn-md text-center'>Adicionar Amigo</button>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
+                
+                <div class = 'col-4 justify-content-center'>
+                    <form class = 'd-flex' method = 'POST' action = "{% url 'adicionar amigos' %}">
+                        {% csrf_token %}
+                        <input class = 'form-control me-2' type = 'search' placeholder = 'Busque um usuario' aria-label='search' name = 'UsuarioBuscado' ></input>
+                        <button type = 'submit' class = 'btn btn-primary border'>Buscar</button>
 
+                    </form>
+                </div>
+
+                <div class = 'col-4 d-flex justify-content-end align-items-center'>
+
+                </div>
+                
+
+            </div>
+
+            <div>
+                {% for usuario in usuarios %}
+                <div class = ' px-5 row border border-dark rounded align-items-center' style = 'padding:10px;margin:10px;background-color:White'>
+                    <div class = ' px-5 col-3'>
+                        <img src="{{ usuario.foto.url }}" alt="imagem do evento" class = "rounded float-left d-flex flex-column " style = 'height: 150px;width: 150px;'>
+                    </div>
+                    <div class = 'px-5 col-3'>
+                        <p class = 'd-flex flex-column ' style = 'font-size: 25px'>{{usuario.nome}}</p>
+                    </div>
+                        <div class = 'px-5 col-3'>
+                        <p class = 'd-flex flex-column ' style = 'font-size: 25px'>{{usuario.curso}} | {{usuario.periodo}}° Periodo</p>
+                    </div>       
+                    <div class = 'px-5 col-3'>
+                        <button class = 'btn btn-primary'>Adicionar Amigo</button>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+                
+            </div>
+        </div>
         <script src="" async defer></script>
     </body>
 </html>

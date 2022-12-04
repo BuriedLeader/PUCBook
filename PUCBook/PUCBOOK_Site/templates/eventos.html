@@ -24,8 +24,13 @@
                     </a>
                 </div>
                 
-                <div class = 'col-4'>
+                <div class = 'col-4 justify-content-center'>
+                    <form class = 'd-flex' method = 'POST' action = "{% url 'busca-evento' %}">
+                        {% csrf_token %}
+                        <input class = 'form-control me-2' type = 'search' placeholder = 'Busque um evento' aria-label='search' name = 'EventoBuscado' id = 'EventoBuscado'></input>
+                        <button type = 'submit' class = 'btn btn-primary border'>Buscar</button>
 
+                    </form>
                 </div>
 
                 <div class = 'col-4 d-flex justify-content-end align-items-center'>

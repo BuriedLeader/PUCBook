@@ -311,14 +311,43 @@ def ExibeAmigos(request):
 @login_required(login_url='/login')
 def AdicionaAmigos(request):
 
-    return render(request,'adicionar-amigos.html',{})
+    if request.method == 'POST':
+
+        busca = request.POST['UsuarioBuscado']
+
+        usuarios = Usuario.objects.filter(nome__contains = busca)
+
+        return render(request,'adicionar-amigos.html',{'usuarios':usuarios,'busca':busca})
+
+    else:
+        usuarios = Usuario.objects.all()
+
+        return render(request,'adicionar-amigos.html',{'usuarios':usuarios})
 
 def ExibeEventos(request):
+    if request.method == 'POST':
 
-    eventos = Evento.objects.all()
+        busca = request.POST['EventoBuscado']
+        eventos = Evento.objects.filter(nome__contains = busca)
 
-    def get_queryset(self): # new
-        return Evento.objects.filter(nome__icontains='A')
+        return render(request,'busca-eventos.html',{'busca':busca,'eventos':eventos})
 
-    return render(request,'eventos.html',{'eventos':eventos})
+    else:
+        eventos = Evento.objects.all()
+
+        return render(request,'eventos.html',{'eventos':eventos})
+
+def BuscaEventos(request):
+
+    if request.method == 'POST':
+
+        busca = request.POST['EventoBuscado']
+        eventos = Evento.objects.filter(nome__contains = busca)
+
+        return render(request,'busca-eventos.html',{'busca':busca,'eventos':eventos})
+    
+    else:
+        return render(request,'busca-eventos.html',{})
+
+    
     

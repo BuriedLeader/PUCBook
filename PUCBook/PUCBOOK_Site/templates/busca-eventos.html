@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Importando Estilos -->
+        <link rel="stylesheet" href="{% static 'groups/styles/styles.css' %}">
+        <script src="https://kit.fontawesome.com/015b8468ac.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title>Eventos</title>
+    </head>
+    <body class="container fundoAzul" style = 'height:100%'>
+        <div class="conteudo fundo-informacao p-2" style = 'height:100%'>
+            <div class = 'row' >
+                <br>
+                <div class = 'col-4'>
+                    <a  href="/eventos" style = "background-color:#FDF6E3;border:none;height:80px;width:100px;">
+                        <img src="{% static 'images/IconeVoltar.png' %}" style = "width: 80px;height:100px">
+                    </a>
+                </div>
+                
+                <div class = 'col-4 justify-content-center'>
+                    <form class = 'd-flex' method = 'POST' action = "{% url 'busca-evento' %}">
+                        {% csrf_token %}
+                        <input class = 'form-control me-2' type = 'search' placeholder = 'Busque um evento' aria-label='search' name = 'EventoBuscado' ></input>
+                        <button type = 'submit' class = 'btn btn-primary border'>Buscar</button>
+
+                    </form>
+                </div>
+
+                <div class = 'col-4 d-flex justify-content-end align-items-center'>
+                    <a href = '/criar-evento'>
+                        <i style = 'font-size: 40px;' class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                </div>
+                
+
+            </div>
+
+            <div>
+                {% if busca %}
+                    <p class="text-center"> Você buscou por {{ busca }}</p>
+                    {%if eventos%}
+                        {% for evento in eventos %}
+                            <div class = ' px-5 row border border-dark rounded align-items-center' style = 'padding:10px;margin:10px;background-color:White'>
+                                <div class = ' px-5 col-4'>
+                                    <img src="{{ evento.foto.url }}" alt="imagem do evento" class = "rounded float-left d-flex flex-column " style = 'height: 150px;width: 150px;'>
+                                </div>
+                                <div class = 'px-5 col-4'>
+                                    <p class = 'd-flex flex-column ' style = 'font-size: 25px'>{{evento.nome}}</p>
+                                </div>
+                                <!--
+                                    <div class = 'px-5 col-3'>
+                                    <p class = 'd-flex flex-column ' style = 'font-size: 25px'>{{evento.descricao | truncatechars:10}}</p>
+                                </div>
+                                -->         
+                                <div class = 'px-5 col-4'>
+                                    <p>Anunciado por: {{ evento.criador }}</p>
+                                    <br>
+                                    <p>Acontecerá em: {{evento.data}}</p>
+                                </div>
+                            </div>
+                            <br>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-center" >Não encontramos nenhum evento com a descrição que você busca</p>
+                    {% endif %}
+                {% else %}
+                
+                    <p class="text-center" >Você precisa realizar uma busca</p>
+
+                {% endif %}
+                
+            </div>
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>
